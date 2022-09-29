@@ -3,7 +3,7 @@
     <v-flex>
       <div class = "white elevation-2">
         <v-toolbar flat dense color="deep-purple accent-4" dark>
-          <v-toolbar-title>Register</v-toolbar-title>
+          <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2" >
           <input type ="email" name = "email" placeholder="email" v-model="email"/>
@@ -11,7 +11,7 @@
           <input type ="password" name = "password" placeholder="Password" v-model="password"/>
           <br>
           <div >{{error}}</div>
-          <v-btn color="deep-purple accent-4" @click="register" dark>submit</v-btn>
+          <v-btn color="deep-purple accent-4" @click="login" dark>submit</v-btn>
         </div>
       </div>
     </v-flex>
@@ -30,8 +30,8 @@ export default {
     }
   },
   methods: {
-    async register () {
-      try { 
+    async login () {
+      try {
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
