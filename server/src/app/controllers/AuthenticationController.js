@@ -1,10 +1,11 @@
 const User=require('mongoose').model('User');
 const jwt = require ('jsonwebtoken')
-const config = require('../../config/config')
+const bcrypt = require ('bcrypt')
 
 function jwtSignUser (user) {
     const ONE_WEEK = 60*60*24*7
-    return jwt.sign (user, config.authentication.jwtSecret, {
+    console.log (process.env.jwtSecret)
+    return jwt.sign (user, process.env.jwtSecret, {
         expiresIn: ONE_WEEK
     })
 }
@@ -12,7 +13,15 @@ function jwtSignUser (user) {
 module.exports = {
     async register (req,res) {
         try {
-            const user = await User.create(req.body) 
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassword = await bcrypt.hash(req.body.password, salt)
+            const user = new User({
+                email: req.body.email,
+                password: hashedPassword
+            })
+            const savedUser = await user.save()
+            res.send (savedUser)
+            //const user = await User.create(req.body) 
             res.send(user.toJSON())
         } catch (err){
             res.status(400).send({

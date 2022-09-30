@@ -1,12 +1,14 @@
 console.log("hello")
 const express = require ('express')
-const mongoose = require('./config/mongoose');
+const mongoose = require('./DB/mongoose');
 const bodyParser = require('body-parser')
 const cors = require ('cors')
 const morgan = require ('morgan')
-const config = require ('./config/config')
+const dotenv = require ('dotenv')
 
-var db = mongoose();
+dotenv.config()
+
+var db = mongoose(process.env.DB_CONNECT);
 const app = express()
 
 
@@ -17,4 +19,4 @@ app.use(cors())
 
 require('./app/routes/routes')(app)
 
-app.listen(config.port)
+app.listen(process.env.PORT)

@@ -1,7 +1,10 @@
 const Joi = require('joi')
+const User=require('mongoose').model('User');
 
 module.exports = {
-    register (req, res, next) {
+    async register (req, res, next) {
+        const emailExist = await User.findOne({email: req.body.email})
+        if (emailExist) return res.status(400).send ({error : 'email already exists'})
         const schema = Joi.object({
             email: Joi.string().email(),
             password: Joi.string().regex(
