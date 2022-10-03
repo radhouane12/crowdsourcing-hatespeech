@@ -1,22 +1,24 @@
 <template>
   <v-layout column>
-    <v-flex>
-      <div class = "white elevation-2">
-        <v-toolbar flat dense color="deep-purple accent-4" dark>
-          <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
-        <div class="pl-4 pr-4 pt-2 pb-2" >
-          <form>
-            <input type ="email" name = "email" placeholder="email" v-model="email"/>
-            <br>
-            <input type ="password" name = "password" placeholder="Password" v-model="password"/>
-            <br>
-            <div >{{error}}</div>
-            <v-btn color="deep-purple accent-4" @click="login" dark>submit</v-btn>
-          </form>
+    <v-container class ="ma-4">
+      <v-flex>
+        <div class = "white elevation-2">
+          <v-toolbar flat dense color="deep-purple" dark>
+            <v-toolbar-title>Login</v-toolbar-title>
+          </v-toolbar>
+          <div class="pl-4 pr-4 pt-2 pb-2" >
+            <form>
+              <input type ="email" name = "email" placeholder="email" v-model="email"/>
+              <br>
+              <input type ="password" name = "password" placeholder="Password" v-model="password"/>
+              <br>
+              <div >{{error}}</div>
+              <v-btn color="deep-purple" @click="login" dark>submit</v-btn>
+            </form>
+          </div>
         </div>
-      </div>
-    </v-flex>
+      </v-flex>
+    </v-container>
   </v-layout>
 </template>
 
@@ -56,5 +58,4 @@ export default {
 </script>
 
 <style scoped>
-  /* eslint-disable */
 </style>

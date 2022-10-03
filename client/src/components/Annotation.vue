@@ -2,7 +2,7 @@
   <v-layout column>
     <v-flex>
       <div class = "white elevation-2">
-        <v-toolbar flat dense color="deep-purple accent-4" dark>
+        <v-toolbar flat dense color="deep-purple" dark>
           <v-toolbar-title>Tweets</v-toolbar-title>
         </v-toolbar>
         <div v-if="tweetsAvailable" class="pl-4 pr-4 pt-2 pb-2" >
@@ -32,23 +32,6 @@ export default {
         return this.tweets
       }
     }
-/*     watch: {
-      tweets(oldTweets,newTweets) {
-        if (newTweets != null) {
-          this.$forceUpdate()
-        }
-      }
-    }, */
-/*     computed: {
-      tweetsAvailable() {
-        console.log(this.tweets != null)
-        return this.tweets != null
-      }
-    }, */
-    //once mounted onto the page, request songs 
-/*     async mounted () {
-        this.tweets = (await AnnotationService.index()).data
-    } */
 }
 </script>
 
