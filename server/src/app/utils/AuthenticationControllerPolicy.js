@@ -32,5 +32,8 @@ module.exports = {
         }else {
             next()
         }
+    },
+    async login (req, res, next) {
+        next()
     }
 }
