@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage'
-import Register from '@/components/Register'
-import Login from '@/components/Login'
-import Annotation from '@/components/Annotation'
+import Annotation from '@/components/HomePage'
 
 Vue.use(Router)
 
@@ -14,16 +12,6 @@ export default new Router({
       path: '/',
       name: 'root',
       component: LandingPage
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
     },
     {
       path: '/annotation',
