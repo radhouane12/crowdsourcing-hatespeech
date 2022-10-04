@@ -54,13 +54,6 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn v-if="!$store.state.auth.isUserLoggedIn" dark small text @click="navigateTo({name: 'login'})">
-        Login
-      </v-btn>
-      <v-btn v-if="!$store.state.auth.isUserLoggedIn" dark class="ml-1" small text
-        @click="navigateTo({name: 'register'})">
-        Sign up
-      </v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -76,7 +69,7 @@ export default {
   },
   computed: {
     windowIsBigEnough() {
-      return this.windowWidth > 920
+      return this.windowWidth > 948
     }
   },
   methods: {

@@ -20,8 +20,15 @@ module.exports = {
             const salt = await bcrypt.genSalt(10)
             const hashedPassword = await bcrypt.hash(req.body.password, salt)
             const user = new User({
-                email: req.body.email,
-                password: hashedPassword
+                username: req.body.username,
+                password: hashedPassword,
+                gender: req.body.gender,
+                age: req.body.age,
+                profession: req.body.profession,
+                annualIncome: req.body.annualIncome,
+                education: req.body.education,
+                nationality: req.body.nationality,
+                residence: req.body.residence,
             })
             const savedUser = (await (user.save())).toJSON()
             //create tokens
@@ -44,10 +51,10 @@ module.exports = {
     },
     async login (req,res) {
         try {
-            const {email, password} = req.body
+            const {username, password} = req.body
             //check if user exists
             const user = await User.findOne({
-                    email: email
+                username: username
             })
             if (!user) {
                 return res.status(403)({
