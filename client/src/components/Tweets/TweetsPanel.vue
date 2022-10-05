@@ -1,22 +1,16 @@
 
 <template>
-    <v-container class="my-6">
+    <v-container>
         <v-layout row>
-            <v-flex>
-                <div class="white elevation-2">
-                    <v-toolbar flat dense color="deep-purple" dark>
-                        <v-toolbar-title>Tweets</v-toolbar-title>
-                    </v-toolbar>
-                    <div v-if="tweetsAvailable" class="pl-4 pr-4 pt-2 pb-2">
-                        <div v-for="element in tweets" :key="element._id">
-                            {{element.tweet}}
-                            <br>
-                            {{element.created_at}}
-                        </div>
-                    </div>
-                </div>
-
-            </v-flex>
+            <v-card class="mx-auto">
+                <v-toolbar dense color="deep-purple" dark>
+                    <v-icon color="white" left>
+                        mdi-twitter
+                    </v-icon>
+                </v-toolbar>
+                <!-- add filter component -->
+                    <tweet></tweet>
+            </v-card>
         </v-layout>
     </v-container>
 </template> 
@@ -32,7 +26,7 @@ export default {
     },
     data() {
         return {
-            tweets: null,
+            tweets: [{ "_id": 1571981878004940800, "created_at": "2022-09-19 23:57:40 CEST", "Category": "Gender", "tweet": "@Emohjify Aliens and or information that aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawould cripple religious beliefs being withheld by some government somewhere" },{ "_id": 1571981878004940800, "created_at": "2022-09-19 23:57:40 CEST", "Category": "Gender", "tweet": "@Emohjify Aliens and or information that aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawould cripple religious beliefs being withheld by some government somewhere" },{ "_id": 1571981878004940800, "created_at": "2022-09-19 23:57:40 CEST", "Category": "Gender", "tweet": "@Emohjify Aliens and or information that aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawould cripple religious beliefs being withheld by some government somewhere" },{ "_id": 1571981878004940800, "created_at": "2022-09-19 23:57:40 CEST", "Category": "Gender", "tweet": "@Emohjify Aliens and or information that aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawould cripple religious beliefs being withheld by some government somewhere" }],
         }
     },
     computed: {

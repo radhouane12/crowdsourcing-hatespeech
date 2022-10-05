@@ -2,9 +2,11 @@
   <v-app id="app">
     <main>
       <PageHeader/>
-      <v-container fluid>
-        <router-view/>
-      </v-container>
+      <v-content >
+          <v-container>
+              <router-view />
+          </v-container>
+      </v-content>
     </main>
   </v-app>
 </template>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage'
-import Annotation from '@/components/HomePage'
+import Annotation from '@/components/Annotation'
 
 Vue.use(Router)
 
