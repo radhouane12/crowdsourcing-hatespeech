@@ -1,18 +1,12 @@
-
-<!-- 
-  change tweet from data to prop,
-  amneties should be changed to Labels,
-  @click="navigateTo({name: 'annotation'})"
--->
 <template>
   <v-card class="card" max-width="800" @mouseover="hover = true" @mouseleave="hover = false" hover outlined>
     <v-card-text>
       <span class="text-h8 text--primary">
-        "{{tweet.tweet}}"
+        "{{passedTweet.tweet}}"
       </span>
       <br>
-      <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on {{tweet.created_at}},
-        Assigned Category: {{tweet.Category}}</span>
+      <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on {{passedTweet.created_at}},
+        Assigned Category: {{passedTweet.Category}}</span>
       <v-chip-group v-model="labels" column multiple v-if="hover || isOpened">
         <v-chip filter outlined color="deep-purple">
           Hateful
@@ -79,9 +73,7 @@
 <script>
 export default {
   props: {
-    /* tweet: {
-      type: Object
-    } */
+    passedTweet: Object
   },
   data() {
     return {
@@ -89,7 +81,6 @@ export default {
       isOpened: false,
       hover: false,
       labels: null,
-      tweet: { "_id": 1571981878004940800, "created_at": "2022-09-19 23:57:40 CEST", "Category": "Gender", "tweet": "@Emohjify Aliens and or information that aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawould cripple religious beliefs being withheld by some government somewhere" },
     }
   },
   computed: {
