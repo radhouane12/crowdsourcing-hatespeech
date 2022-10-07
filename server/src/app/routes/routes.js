@@ -12,13 +12,25 @@ module.exports = (app) => {
     AuthenticationControllerPolicy.login,
     AuthenticationController.login)
 
-    app.get("/annotation",
-    verifyToken.authenticate,
-    AnnotationController.index)
-
     app.post("/logout",
     AuthenticationController.logout)
     
     app.post("/getNewToken",
     AuthenticationController.getNewToken)
+
+    app.get("/annotation",
+    verifyToken.authenticate,
+    AnnotationController.index)
+
+    app.post("/getOne",
+    verifyToken.authenticate,
+    AnnotationController.getOne)
+
+    app.post("/skipTweet",
+    verifyToken.authenticate,
+    AnnotationController.skipTweet)
+
+    app.post("/getFiltered",
+    verifyToken.authenticate,
+    AnnotationController.getFiltered)
 }

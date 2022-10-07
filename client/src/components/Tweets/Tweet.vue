@@ -1,12 +1,12 @@
 <template>
-  <v-card class="card" max-width="800" @mouseover="hover = true" @mouseleave="hover = false" hover outlined>
+  <v-card class="card" @mouseover="hover = true" @mouseleave="hover = false" hover outlined>
     <v-card-text>
       <span class="text-h8 text--primary">
         "{{passedTweet.tweet}}"
       </span>
       <br>
-      <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on {{passedTweet.created_at}},
-        Assigned Category: {{passedTweet.Category}}</span>
+      <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on {{passedTweet.created_at.slice(0,10)}},
+        Assigned Category: {{passedTweet.category}}</span>
       <v-chip-group v-model="labels" column multiple v-if="hover || isOpened">
         <v-chip filter outlined color="deep-purple">
           Hateful
@@ -41,7 +41,7 @@
     </v-card-text>
     <v-card-actions class="mt-n7" v-if="hover || isOpened">
       <v-spacer></v-spacer>
-      <v-btn small outlined color="deep-purple">
+      <v-btn @click="skip" small outlined color="deep-purple">
         skip
       </v-btn>
       <v-btn small contained color="deep-purple" :disabled="!oneLabelSelected">
@@ -101,7 +101,21 @@ export default {
       this.additionalLabel = ''
       return false
     }
+  },
+  methods: {
+    skip () {
+      this.$emit('skipTweet', this.passedTweet._id)
+    },
+    submit() {
+
+    },
+    flag() {
+
+    }
   }
+    
+  //assign to another category with dialog later
+
 }
 </script>
 

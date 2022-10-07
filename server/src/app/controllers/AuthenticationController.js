@@ -41,7 +41,7 @@ module.exports = {
             })
             await tokenRecord.save()
             //respond with id and tokens
-            res.json({ accessToken: accessToken, refreshToken: refreshToken, user: savedUser._id })
+            res.json({ accessToken: accessToken, refreshToken: refreshToken, user: savedUser})
         } catch (err){
             res.status(400).send({
                 error: "this email account is already in use"
@@ -79,7 +79,7 @@ module.exports = {
             })
             await tokenRecord.save()
             //respond with id and tokens
-            res.json({ accessToken: accessToken, refreshToken: refreshToken, user: userJson._id })
+            res.json({ accessToken: accessToken, refreshToken: refreshToken, user: userJson})
         } catch (err){
             res.status(500).send({
                 error: "login failed"
