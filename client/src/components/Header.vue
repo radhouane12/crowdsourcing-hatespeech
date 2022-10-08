@@ -7,49 +7,55 @@
       <v-spacer></v-spacer>
       <!-- Flags only if user has role admin -->
       <div v-if="windowIsBigEnough">
-        <v-btn v-if="$store.state.auth.isUserLoggedIn" dark small text>
+        <v-btn v-if="$store.state.auth.testState" dark small contained depressed @click="quitTest">
+          Quit Test
+        </v-btn>
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text>
           Flags
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn" dark small text class="ml-1"
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1"
           @click="navigateTo({name: 'annotation'})">
           Annotation
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn" dark small text class="ml-1">
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1">
           Dictionaries
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn" dark small class="ml-1" text>
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small class="ml-1" text>
           Statistics
         </v-btn>
-        <v-btn dark small text class="ml-1">
+        <v-btn v-if="!$store.state.auth.testState" dark small text class="ml-1">
           About
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn" dark small contained depressed class="ml-5" @click="logout">
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small contained depressed class="ml-5" @click="logout">
           Sign out
         </v-btn>
       </div>
-      <v-menu bottom left v-else-if="$store.state.auth.isUserLoggedIn">
+      <v-menu bottom left v-else>
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="white" icon v-bind="attrs" v-on="on">
             <v-icon>mdi-dots-horizontal</v-icon>
           </v-btn>
         </template>
         <v-list>
-          <v-list-item>
+          <v-list-item v-if="$store.state.auth.testState" @click="quitTest">
+            <v-list-item-title>Quit Test</v-list-item-title>
+          </v-list-item>
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
             <v-list-item-title>Flags</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="navigateTo({name: 'annotation'})">
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="navigateTo({name: 'annotation'})">
             <v-list-item-title>Annotation</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
             <v-list-item-title>Dictionaries</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
             <v-list-item-title>Statistics</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item v-if="!$store.state.auth.testState">
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="logout">
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="logout">
             <v-list-item-title>Sign out</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -85,8 +91,8 @@ export default {
         const response = await AuthenticationService.logout(this.$store.state.auth.refreshToken)
         this.$store.dispatch('setRefreshToken', null)
         this.$store.dispatch('setAccessToken', null)
-        this.$store.dispatch('setUser', null)
-        this.$router.push({ name: 'root' }).catch(error => {
+        this.$store.dispatch('removeUser')
+        this.$router.push({ name: 'landing' }).catch(error => {
           if (error.name != "NavigationDuplicated") {
             throw error;
           }
@@ -95,6 +101,14 @@ export default {
       catch (error) {
         this.error = error
       }
+    },
+    quitTest() {
+      this.$store.dispatch('testState', false)
+      this.$router.push({ name: 'annotation' }).catch(error => {
+        if (error.name != "NavigationDuplicated") {
+          throw error;
+        }
+      })
     }
   },
   mounted() {

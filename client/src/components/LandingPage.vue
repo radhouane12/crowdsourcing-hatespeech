@@ -5,9 +5,9 @@
                 <v-sheet color="deep-purple" elevation="1" height="400" outlined rounded shaped>
                     <img :src="require('../assets/background.jpg')"
                         style="max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%;" />
-                    <!-- <p class="my-3 mx-4" style="color:white">
+                    <!-- <p class="my-3 mx-4" style="color:black">
                         This is a text about the platform
-                    </p> -->
+                    </p>  -->
                 </v-sheet>
             </v-flex>
             <v-flex></v-flex>

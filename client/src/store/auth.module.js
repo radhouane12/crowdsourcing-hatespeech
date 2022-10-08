@@ -6,7 +6,9 @@ export const auth ={
         refreshToken: null,
         accessToken: null,
         user: null,
-        isUserLoggedIn: false
+        isUserLoggedIn: false,
+        isExpert: false,
+        testState: false,
     },
     mutations: {
         setRefreshToken (state, refreshToken) {
@@ -22,7 +24,16 @@ export const auth ={
         },
         setUser (state, user) {
             state.user = user
+            state.isExpert = user.isExpert
+        },
+        removeUser (state) {
+            state.user = null
+            state.isExpert = false
+        },
+        testState (state, testState) {
+            state.testState = testState
         }
+
     },
     actions: {
         setRefreshToken ({commit}, refreshToken) {
@@ -33,6 +44,12 @@ export const auth ={
         },
         setUser ({commit}, user) {
             commit('setUser', user)
+        },
+        removeUser ({commit}) {
+            commit('removeUser')
+        },
+        testState ({commit}, testState) {
+            commit('testState', testState)
         }
     }
 }

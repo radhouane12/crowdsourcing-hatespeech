@@ -10,7 +10,7 @@ var userSchema=new Schema({
     education: String,
     nationality: String,
     residence: String,
-    role: {type: String, enum: ['Expert', 'Regular']}
+    isExpert: Boolean,
 });
 
 module.exports=mongoose.model('User', userSchema);

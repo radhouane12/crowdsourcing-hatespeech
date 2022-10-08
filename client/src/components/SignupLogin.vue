@@ -17,18 +17,18 @@
                     <v-card class="elevation-12">
                         <v-card-text>
                             <v-form>
-                                <v-text-field prepend-icon="person" label="Username" type="text"
-                                    v-model="username"></v-text-field>
+                                <v-text-field prepend-icon="person" label="Username" type="text" v-model="username">
+                                </v-text-field>
                                 <v-text-field id="password" prepend-icon="lock" label="Password"
-                                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                                    :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1"
-                                    hint="At least 8 characters" v-model="password"></v-text-field>
+                                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'"
+                                    @click:append="show1 = !show1" hint="At least 8 characters" v-model="password">
+                                </v-text-field>
                                 <div v-if="errorlogin" style="color:red;">{{errorlogin}}</div>
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
-                            <v-checkbox class="mb-2 ml-5" v-model="rememberMe" label="Remember me"
-                                type="checkbox"></v-checkbox>
+                            <v-checkbox class="mb-2 ml-5" v-model="rememberMe" label="Remember me" type="checkbox">
+                            </v-checkbox>
                             <v-spacer></v-spacer>
                             <v-btn color="deep-purple" @click="login">
                                 <span style="color:#FFFFFF; font-size: 13px">Log in</span>
@@ -42,19 +42,17 @@
                     <form class="ma-3" @submit.prevent="submit">
                         <v-layout row class="ma-3">
                             <v-flex xs12 md5>
-                                <validation-provider v-slot="{ errors }" name="Username"
-                                    rules="required">
-                                    <v-text-field v-model="registerUsername" :error-messages="errors"
-                                        label="Username" required></v-text-field>
+                                <validation-provider v-slot="{ errors }" name="Username" rules="required">
+                                    <v-text-field v-model="registerUsername" :error-messages="errors" label="Username"
+                                        required></v-text-field>
                                 </validation-provider>
                                 <div v-if="error" class="mb-4" style="color:red;">{{error}}</div>
                             </v-flex>
                             <v-flex></v-flex>
                             <v-flex xs12 md5>
-                                <validation-provider v-slot="{ errors }" name="Password"
-                                    rules="required|min:8">
-                                    <v-text-field v-model="registerPassword" :error-messages="errors"
-                                        label="Password" required hint="At least 8 characters"
+                                <validation-provider v-slot="{ errors }" name="Password" rules="required|min:8">
+                                    <v-text-field v-model="registerPassword" :error-messages="errors" label="Password"
+                                        required hint="At least 8 characters"
                                         :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                                         :type="show ? 'text' : 'password'" @click:append="show = !show">
                                     </v-text-field>
@@ -62,72 +60,70 @@
                             </v-flex>
                             <v-flex xs0 md3></v-flex>
                             <v-flex xs12 md6>
-                                <v-slider class="mt-2" v-model="age" color="deep-purple" label="Age"
-                                    min="1" max="100" thumb-label></v-slider>
+                                <v-slider class="mt-2" v-model="age" color="deep-purple" label="Age" min="1" max="100"
+                                    thumb-label></v-slider>
                             </v-flex>
                             <v-flex xs0 md3></v-flex>
                             <v-flex xs12 md4>
                                 <validation-provider v-slot="{ errors }" name="Gender" rules="required">
-                                    <v-select v-model="selectedGender" :items="gender"
-                                        :error-messages="errors" label="Gender" required></v-select>
+                                    <v-select v-model="selectedGender" :items="gender" :error-messages="errors"
+                                        label="Gender" required></v-select>
                                 </validation-provider>
                             </v-flex>
                             <v-flex></v-flex>
                             <v-flex xs12 md7>
-                                <validation-provider v-slot="{ errors }" name="Level of education"
-                                    rules="required">
-                                    <v-select v-model="selectedEducation" :items="education"
-                                        :error-messages="errors" label="Level of education" required>
+                                <validation-provider v-slot="{ errors }" name="Level of education" rules="required">
+                                    <v-select v-model="selectedEducation" :items="education" :error-messages="errors"
+                                        label="Level of education" required>
                                     </v-select>
                                 </validation-provider>
                             </v-flex>
                             <v-flex xs12 md6>
-                                <validation-provider v-slot="{ errors }" name="Profession"
-                                    rules="required">
-                                    <v-text-field v-model="profession" :error-messages="errors"
-                                        label="Profession" required></v-text-field>
-                                </validation-provider>
-                            </v-flex>
-                            <v-flex></v-flex>
-                            <v-flex xs12 md5>
-                                <validation-provider v-slot="{ errors }" name="Annual Income"
-                                    rules="required|numeric">
-                                    <v-text-field v-model="annualIncome" :error-messages="errors"
-                                        prefix="$" hint="Only numbers are allowed" label="Annual Income"
+                                <validation-provider v-slot="{ errors }" name="Profession" rules="required">
+                                    <v-text-field v-model="profession" :error-messages="errors" label="Profession"
                                         required></v-text-field>
                                 </validation-provider>
                             </v-flex>
-                            
+                            <v-flex></v-flex>
                             <v-flex xs12 md5>
-                                <validation-provider v-slot="{ errors }" name="Nationality"
-                                    rules="required">
-                                    <v-select v-model="nationality" :items="nationalities"
-                                        :error-messages="errors" label="Nationality" required>
+                                <validation-provider v-slot="{ errors }" name="Annual Income" rules="required|numeric">
+                                    <v-text-field v-model="annualIncome" :error-messages="errors" prefix="$"
+                                        hint="Only numbers are allowed" label="Annual Income" required></v-text-field>
+                                </validation-provider>
+                            </v-flex>
+
+                            <v-flex xs12 md5>
+                                <validation-provider v-slot="{ errors }" name="Nationality" rules="required">
+                                    <v-select v-model="nationality" :items="nationalities" :error-messages="errors"
+                                        label="Nationality" required>
                                     </v-select>
                                 </validation-provider>
                             </v-flex>
                             <v-flex></v-flex>
                             <v-flex xs12 md5>
-                                <validation-provider v-slot="{ errors }" name="Country of Residence"
-                                    rules="required">
-                                    <v-select v-model="residence" :items="nationalities"
-                                        :error-messages="errors" label="Country of Residence" required>
+                                <validation-provider v-slot="{ errors }" name="Country of Residence" rules="required">
+                                    <v-select v-model="residence" :items="nationalities" :error-messages="errors"
+                                        label="Country of Residence" required>
                                     </v-select>
                                 </validation-provider>
                             </v-flex>
-                            
+                            <v-row xs12 md7>
+                                <v-spacer></v-spacer>
+                                <v-checkbox small v-model="expert" label="I want to be an expert user"></v-checkbox>
+                                <v-spacer></v-spacer>
+                            </v-row>
                             <v-flex xs12 md12>
                                 <div class="mb-4"><a href="#" @click.prevent="why = true">Why we require
-                                    this information ?</a></div>
+                                        this information ?</a></div>
                             </v-flex>
                             <v-flex xs12 md12>
                                 <v-btn color="deep-purple" @click="clear" outlined>
-                                <span style="color:#673AB7">clear</span>
-                            </v-btn>
-                            <v-btn color="deep-purple" class="mr-4" type="submit" :disabled="invalid"
-                                absolute right @click="register">
-                                <span style="color:#FFFFFF">Register</span>
-                            </v-btn>
+                                    <span style="color:#673AB7">clear</span>
+                                </v-btn>
+                                <v-btn color="deep-purple" class="mr-4" type="submit" :disabled="invalid" absolute right
+                                    @click="register">
+                                    <span style="color:#FFFFFF">Register</span>
+                                </v-btn>
                             </v-flex>
                             <v-dialog v-model="why" width="70%">
                                 <v-card>
@@ -153,7 +149,7 @@
     </v-card>
 </template>
 <script>
-    import { required, min, numeric } from 'vee-validate/dist/rules'
+import { required, min, numeric } from 'vee-validate/dist/rules'
 import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate'
 import AuthenticationService from '@/services/AuthenticationService'
 
@@ -214,6 +210,7 @@ export default {
         nationality: null,
         residence: null,
         nationalities: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Cayman Islands", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cruise Ship", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyz Republic", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Satellite", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "St. Lucia", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"],
+        expert: false,
         why: false,
         error: null,
         errorlogin: null
@@ -233,6 +230,7 @@ export default {
             this.selectedEducation = null
             this.nationality = null
             this.residence = null
+            this.expert = false
             this.$refs.observer.reset()
         },
         async login() {
@@ -279,20 +277,30 @@ export default {
                     education: this.selectedEducation,
                     nationality: this.nationality,
                     residence: this.residence,
+                    isExpert: false
                 })
                 try {
-                    if (response.response.status == 400) {
-                        this.error = response.response.data.error
+                    if (response.response.status == 400) {                       // Workaround: when bad request we receive a response.response 
+                        this.error = response.response.data.error                // and when it doesn't fail then reading response.response returns an error and sends to catch {}
                     }
                 } catch (err) {
                     this.$store.dispatch('setRefreshToken', response.data.refreshToken)
                     this.$store.dispatch('setAccessToken', response.data.accessToken)
                     this.$store.dispatch('setUser', response.data.user)
-                    this.$router.push({ name: 'annotation' }).catch(error => {
-                        if (error.name != "NavigationDuplicated") {
-                            throw error;
-                        }
-                    })
+                    if (!this.expert) {
+                        this.$router.push({ name: 'annotation' }).catch(error => {
+                            if (error.name != "NavigationDuplicated") {
+                                throw error;
+                            }
+                        })
+                    } else {
+                        this.$store.dispatch('testState', true)
+                        this.$router.push({ name: 'testPage' }).catch(error => {
+                            if (error.name != "NavigationDuplicated") {
+                                throw error;
+                            }
+                        })
+                    }  
                 }
             }
             catch (error) {

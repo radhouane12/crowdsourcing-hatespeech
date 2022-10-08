@@ -29,6 +29,7 @@ module.exports = {
                 education: req.body.education,
                 nationality: req.body.nationality,
                 residence: req.body.residence,
+                isExpert: req.body.isExpert,
             })
             const savedUser = (await (user.save())).toJSON()
             //create tokens
