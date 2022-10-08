@@ -5,7 +5,8 @@
         "{{passedTweet.tweet}}"
       </span>
       <br>
-      <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on {{passedTweet.created_at.slice(0,10)}},
+      <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on
+        {{passedTweet.created_at.slice(0,10)}},
         Assigned Category: {{passedTweet.category}}</span>
       <v-chip-group v-model="labels" column multiple v-if="hover || isOpened">
         <v-chip filter outlined color="deep-purple">
@@ -15,7 +16,7 @@
           Abusive
         </v-chip>
         <v-chip filter outlined color="deep-purple">
-          Normal
+          Neutral
         </v-chip>
         <v-chip filter outlined color="deep-purple">
           Spam
@@ -44,25 +45,32 @@
       <v-btn @click="skip" small outlined color="deep-purple">
         skip
       </v-btn>
-      <v-btn small contained color="deep-purple" :disabled="!oneLabelSelected">
+      <v-btn small contained color="deep-purple" :disabled="!oneLabelSelected" @click="submit">
         <span style="color:#FFFFFF;">Submit</span>
       </v-btn>
-      <v-menu top left v-model="isOpened">
+      <v-menu :close-on-content-click="false" top left v-model="isOpened">
         <template v-slot:activator="{ on, attrs }">
           <v-btn color="deep-purple" icon v-bind="attrs" v-on="on">
             <v-icon>mdi-dots-horizontal</v-icon>
           </v-btn>
         </template>
-        <v-list>
-          <v-list-item>
+        <v-list style="overflow-y: auto">
+          <v-list-item dense @click ="flag('Tweet is not comprehensible')">
             <v-list-item-title>Tweet is not comprehensible</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item dense @click ="flag('Tweet is not in English')">
             <v-list-item-title>Tweet is not in English</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Assign to another category</v-list-item-title>
-          </v-list-item>
+          <v-list-group no-action>
+            <template v-slot:activator>
+              <v-list-item dense>
+                  <v-list-item-title>Assign to another category</v-list-item-title>
+              </v-list-item>
+            </template>
+            <v-list-item v-for="category in categories" :key="category" dense @click="addCategory(category)">
+                <v-list-item-title>{{category}}</v-list-item-title>
+            </v-list-item>
+          </v-list-group>
         </v-list>
       </v-menu>
     </v-card-actions>
@@ -81,6 +89,7 @@ export default {
       isOpened: false,
       hover: false,
       labels: null,
+      categories: ['Gender','Sexuality','Ethnicity','Religion','Race','Disability']
     }
   },
   computed: {
@@ -103,18 +112,26 @@ export default {
     }
   },
   methods: {
-    skip () {
+    skip() {
       this.$emit('skipTweet', this.passedTweet._id)
     },
     submit() {
-
+      var convertedLabels = this.labels.map(item=> item==0 ? 'Hateful' : item==1 ? 'Abusive' : item==2 ? 'Neutral' :item==3 ? 'spam' :item==4 ? 'Threat' :'')
+      convertedLabels = convertedLabels.filter(Boolean);
+      if (this.additionalLabel) convertedLabels.push(this.additionalLabel)
+      this.$emit('submit', {'tweetId' :this.passedTweet._id, "labels": convertedLabels})
+      this.additionalLabel = ''
+      this.labels = null
     },
-    flag() {
-
+    flag(flag) {
+      this.isOpened=false
+      this.$emit('flagTweet', {'tweetId' :this.passedTweet._id, 'flag' : flag})
+    },
+    addCategory(category) {
+      this.isOpened=false
+      this.$emit('addCategory', {'tweetId':this.passedTweet._id, 'newCategory' : category})
     }
   }
-    
-  //assign to another category with dialog later
 
 }
 </script>

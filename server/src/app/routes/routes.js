@@ -33,4 +33,16 @@ module.exports = (app) => {
     app.post("/getFiltered",
     verifyToken.authenticate,
     AnnotationController.getFiltered)
+    
+    app.post("/flagTweet",
+    verifyToken.authenticate,
+    AnnotationController.flagTweet)
+
+    app.post("/addCategory",
+    verifyToken.authenticate,
+    AnnotationController.addCategory)
+
+    app.post("/labelTweet",
+    verifyToken.authenticate,
+    AnnotationController.labelTweet)
 }

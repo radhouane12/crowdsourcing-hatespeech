@@ -24,7 +24,7 @@ export default {
 
 <style>
 #app {
-  background: url('./assets/Sprinkle.jpg') no-repeat center center fixed;
+  background: url('./assets/Sprink.png') no-repeat center center fixed;
   background-size: cover;
 }
 </style>

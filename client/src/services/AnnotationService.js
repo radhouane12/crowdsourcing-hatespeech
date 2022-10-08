@@ -19,6 +19,13 @@ export default {
               'skipnumber' : i,
             }
         })
+    },   
+    getFiltered (filters) {
+        return Api.createAxiosRequest().post('getFiltered',filters,{
+            headers: {
+              'Authorization': "Bearer " + store.state.auth.accessToken,
+            }
+        })
     },
     skipTweet(tweetInfo){
         return Api.createAxiosRequest().post('skipTweet',tweetInfo,{
@@ -27,12 +34,26 @@ export default {
             }
         })
     },
-    getFiltered (filters) {
-        return Api.createAxiosRequest().post('getFiltered',filters,{
+    flagTweet(tweetInfo){
+        return Api.createAxiosRequest().post('flagTweet',tweetInfo,{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
             }
         })
-    }
+    },
+    addCategory(tweetInfo){
+        return Api.createAxiosRequest().post('addCategory',tweetInfo,{
+            headers: {
+              'Authorization': "Bearer " + store.state.auth.accessToken,
+            }
+        })
+    },
+    labelTweet(tweetInfo){
+        return Api.createAxiosRequest().post('labelTweet',tweetInfo,{
+            headers: {
+              'Authorization': "Bearer " + store.state.auth.accessToken,
+            }
+        })
+    },
 }
 

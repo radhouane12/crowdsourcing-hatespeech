@@ -66,7 +66,11 @@
 
                 <div v-if="tweetsAvailable">
                     <div id="view" v-for="item in tweets">
-                        <tweet :passed-tweet="item" @skipTweet="skip($event)"></tweet>
+                        <tweet :passed-tweet="item" 
+                        @skipTweet="skip($event)" 
+                        @flagTweet="flag($event)" 
+                        @addCategory="addCategory($event)"
+                        @submit="submitLabels($event)"></tweet>
                     </div>
                 </div>
             </v-card>
@@ -102,14 +106,6 @@ export default {
         },
     },
     methods: {
-        async skip(id) {
-            const pos = this.tweets.map(tweet => tweet._id).indexOf(id)
-            this.tweets.splice(pos, 1)
-            await AnnotationService.skipTweet({ "tweetId": id, "user": this.$store.state.auth.user._id })
-            await this.getReplacement()
-        },
-
-        // Adjust to filtering
         async getReplacement() {
             let i = 0
             let replacement = (await AnnotationService.getOne(this.$store.state.auth.user._id, i,
@@ -132,11 +128,31 @@ export default {
                                                             "date" : this.date, 
                                                             "categories" : this.categories, 
                                                             "len" :this.filterLength})).data
-        }
+        },
+        async skip(id) {
+            const pos = this.tweets.map(tweet => tweet._id).indexOf(id)
+            this.tweets.splice(pos, 1)
+            await AnnotationService.skipTweet({ "tweetId": id, "user": this.$store.state.auth.user._id })
+            await this.getReplacement()
+        },
+        async flag(data) {
+            const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
+            this.tweets.splice(pos, 1)
+            await AnnotationService.flagTweet({ "tweetId": data.tweetId, "user": this.$store.state.auth.user._id, "flag": data.flag })
+            await this.getReplacement()
+        },
+        async addCategory(data) {
+            const updatedVersion = (await AnnotationService.addCategory({ "tweetId": data.tweetId, "newCategory": data.newCategory })).data
+            const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
+            this.tweets.splice(pos, 1,updatedVersion)
+        },
+        async submitLabels(data) {
+            const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
+            this.tweets.splice(pos, 1)
+            await AnnotationService.labelTweet({ "tweetId": data.tweetId, "user": this.$store.state.auth.user._id, "labels": data.labels})
+            await this.getReplacement()
+        },
     }
-    //through emitted events
-    //annotate ==> annotationservice.annotate && remove from wiewedtweets &&  splice one tweet from imported to viewed
-    //flag   ==> annotationservice.flag
 }
 </script>
   
