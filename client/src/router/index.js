@@ -2,15 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '@/components/LandingPage'
 import Annotation from '@/components/Annotation'
+import store from "../store/store"
 
 Vue.use(Router)
 
-
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'root',
+      name: 'landing',
       component: LandingPage
     },
     {
@@ -20,3 +20,19 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if ( to.name!== 'landing' && !store.state.auth.isUserLoggedIn) {
+    next({name: 'landing', replace: true})
+  }
+  else next()
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name == 'landing' && store.state.auth.isUserLoggedIn) {
+    next({ name: 'annotation' })
+  }
+  else next()
+})
+
+export default router
