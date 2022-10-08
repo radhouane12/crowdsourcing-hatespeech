@@ -171,8 +171,11 @@ app.use(morgan("combined"))
 app.use(bodyParser.json());
 app.use(cors())
 
+var authenticationRoutes = require('./app/routes/authentication.routes')
+authenticationRoutes(app)
 
-require('./app/routes/routes')(app)
+var annotationRoutes = require('./app/routes/annotation.routes')
+annotationRoutes(app)
 
 mySeeder()
 app.listen(process.env.PORT)
