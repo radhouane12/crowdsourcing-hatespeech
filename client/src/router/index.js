@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LandingPage from '../components/LandingPage'
-import Annotation from '../components/Annotation'
+import Annotation from '../components/Tweets/Annotation'
 import Test from '../components/Test/Test'
 import store from "../store/store"
 

@@ -5,7 +5,7 @@
         <img class="mr-3 mt-2 d-md home" :src="require('../assets/logo.png')" height="34" />
       </div>
       <v-spacer></v-spacer>
-      <!-- Flags only if user has role admin -->
+      <!-- Flags only if user is expert -->
       <div v-if="windowIsBigEnough">
         <v-btn v-if="$store.state.auth.testState" dark small contained depressed @click="quitTest">
           Quit Test

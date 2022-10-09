@@ -177,5 +177,8 @@ authenticationRoutes(app)
 var annotationRoutes = require('./app/routes/annotation.routes')
 annotationRoutes(app)
 
+var testRoutes = require('./app/routes/test.routes')
+testRoutes(app)
+
 mySeeder()
 app.listen(process.env.PORT)

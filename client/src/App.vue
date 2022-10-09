@@ -2,7 +2,7 @@
   <v-app id="app">
     <main>
       <PageHeader/>
-      <v-content >
+      <v-content class ="my-4">
           <v-container>
               <router-view />
           </v-container>
@@ -24,7 +24,7 @@ export default {
 
 <style>
 #app {
-  background: url('./assets/Sprink.png') no-repeat center center fixed;
+  background: url('./assets/W.png') no-repeat center center fixed;
   background-size: cover;
 }
 </style>

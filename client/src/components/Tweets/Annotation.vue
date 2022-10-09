@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import TweetsPanel from './Tweets/TweetsPanel.vue'
+import TweetsPanel from './TweetsPanel.vue'
 
 export default {
     components: {

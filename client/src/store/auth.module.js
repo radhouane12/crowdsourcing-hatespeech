@@ -32,8 +32,10 @@ export const auth ={
         },
         testState (state, testState) {
             state.testState = testState
+        },
+        makeExpert(state) {
+            state.isExpert = true
         }
-
     },
     actions: {
         setRefreshToken ({commit}, refreshToken) {
@@ -50,6 +52,9 @@ export const auth ={
         },
         testState ({commit}, testState) {
             commit('testState', testState)
+        },
+        makeExpert({commit}) {
+            commit('makeExpert')
         }
     }
 }

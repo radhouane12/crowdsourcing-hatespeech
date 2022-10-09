@@ -1,0 +1,93 @@
+[
+    {},
+    {
+        "id": "1",
+        "created_at": "2022-09-30",
+        "tweet": "Boy I can talk a cat off a fish wagon \ud83d\ude38",
+        "category": [
+            "Disability"
+        ],
+        "labels": ["Spam"]
+    },
+    {
+        "id": "2",
+        "created_at": "2022-09-21",
+        "tweet": "I hope you listen to this interview recorded outside B.O. Fish Wagon in Key West, Florida.  The great Barry Cuda, ladies and gentlemen. You don't even have to leave Twitter to hear it.   https://t.co/sih2jDVr0A",
+        "category": [
+            "Disability"
+        ],
+        "labels": ["Spam"]
+    },
+    {
+        "id": "3",
+        "created_at": "2022-09-20",
+        "tweet": "Serving fat game that you couldn\u2019t imagine Boy I can talk a cat off a fish wagon Or sell an Eskimo ice at a high price and get him twice Mayne, I\u2019m nuttin' nice and games my merchandise So get ya scrilla, ya fetti, ya scratch, and yo' mail Holla at me folks, I got game for sale",
+        "category": [
+            "Disability"
+        ],
+        "labels": ["Hateful","Threat"]
+    },
+    {
+        "id": "4",
+        "created_at": "2022-09-19",
+        "tweet": "fortunately or unfortunately (still haven't made up my mind...) for you i got dq in 20' but despite that i was born w this shit in my blood \ud83e\udd76\u2665\ufe0frip  serving fat game that you'll never imagine boy i can talk a cat off a fish wagon  https://t.co/3LMgI3R0Zb",
+        "category": [
+            "Disability"
+        ],
+        "labels": ["Hateful","Threat"]
+    },
+    {
+        "id": "5",
+        "created_at": "2022-10-04",
+        "tweet": "@lilygrutcher Russians threatening Mexicans in race to expatriate!",
+        "category": [
+            "Ethnicity"
+        ],
+        "labels": ["Hateful"]
+    },
+    {
+        "id": "6",
+        "created_at": "2022-10-04",
+        "tweet": "Expatriate Group To Revolutionise Health Insurance with a New Cashless Offering  https://t.co/0cOQm6VOmd",
+        "category": [
+            "Ethnicity"
+        ],
+        "labels": ["Neutral"]
+    },
+    {
+        "id": "7",
+        "created_at": "2022-10-04",
+        "tweet": "The line between being an expatriate and an immigrant is finer than we imagine. Speaking from personal experiencesz Poem by Edwin Alanis Garcia #poem #expatriate #immigrant  https://t.co/gf8x40f2i2",
+        "category": [
+            "Ethnicity"
+        ],
+        "labels": ["Spam"]
+    },
+    {
+        "id": "8",
+        "created_at": "2022-10-04",
+        "tweet": "Ahem. As I was saying, I remain Snezhnaya\u2019s greatest expatriate toy seller, currently attached to the Liyue Branch of our Institute for Toy Research!",
+        "category": [
+            "Ethnicity"
+        ],
+        "labels": ["Abusive"]
+    },
+    {
+        "id": "9",
+        "created_at": "2022-10-04",
+        "tweet": "One group is called herders. Another is called ranchers. They are doing the exact same thing - livestock farming.  (this reminds me of immigrant vs expatriate)",
+        "category": [
+            "Ethnicity"
+        ],
+        "labels": ["Hateful"]
+    },
+    {
+        "id": "10",
+        "created_at": "2022-10-04",
+        "tweet": "I want diana vickers as a loose woman essentially",
+        "category": [
+            "Gender"
+        ],
+        "labels": ["Abusive","Hateful","Threat"]
+    }
+]
