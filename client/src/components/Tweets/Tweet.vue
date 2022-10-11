@@ -61,7 +61,7 @@
           <v-list-item dense @click ="flag('Tweet is not in English')">
             <v-list-item-title>Tweet is not in English</v-list-item-title>
           </v-list-item>
-          <v-list-group no-action>
+          <v-list-group no-action v-if="$store.state.auth.isExpert">
             <template v-slot:activator>
               <v-list-item dense>
                   <v-list-item-title>Assign to another category</v-list-item-title>

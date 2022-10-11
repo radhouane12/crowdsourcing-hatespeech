@@ -123,7 +123,7 @@ export default {
             this.i++
             localStorage.i = this.i
             if (this.i >=this.results.length) {
-                if (this.score/this.totalScore >= 0.0) {
+                if (this.score/this.totalScore >= 7.0) {
                     this.role= 'Expert'
                     this.$store.dispatch('makeExpert')
                     await TestService.makeExpert()

@@ -5,30 +5,29 @@
         <img class="mr-3 mt-2 d-md home" :src="require('../assets/logo.png')" height="34" />
       </div>
       <v-spacer></v-spacer>
-      <!-- Flags only if user is expert -->
       <div v-if="windowIsBigEnough">
         <v-btn v-if="$store.state.auth.testState" dark small contained depressed @click="quitTest">
           Quit Test
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert"
-          dark small text>
+          dark small text @click="navigateTo({name: 'flags'})">
           Flags
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1"
           @click="navigateTo({name: 'annotation'})">
           Annotation
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1">
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1"   @click="navigateTo({name: 'dictionaries'})">
           Dictionaries
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small class="ml-1" text>
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small class="ml-1" text   @click="navigateTo({name: 'statistics'})">
           Statistics
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState  && !$store.state.auth.isExpert"
           dark small text @click="beExpert()">
           Become Expert
         </v-btn>
-        <v-btn v-if="!$store.state.auth.testState" dark small text class="ml-1">
+        <v-btn v-if="!$store.state.auth.testState" dark small text class="ml-1"  @click="navigateTo({name: 'about'})">
           About
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small contained depressed
@@ -47,17 +46,17 @@
             <v-list-item-title>Quit Test</v-list-item-title>
           </v-list-item>
           <v-list-item
-            v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert">
+            v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert" @click="navigateTo({name: 'flags'})">
             <v-list-item-title>Flags</v-list-item-title>
           </v-list-item>
           <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState"
             @click="navigateTo({name: 'annotation'})">
             <v-list-item-title>Annotation</v-list-item-title>
           </v-list-item>
-          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="navigateTo({name: 'dictionaries'})">
             <v-list-item-title>Dictionaries</v-list-item-title>
           </v-list-item>
-          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="navigateTo({name: 'statistics'})">
             <v-list-item-title>Statistics</v-list-item-title>
           </v-list-item>
           <v-list-item
@@ -65,7 +64,7 @@
             @click="beExpert()">
             <v-list-item-title>Become Expert</v-list-item-title>
           </v-list-item>
-          <v-list-item v-if="!$store.state.auth.testState">
+          <v-list-item v-if="!$store.state.auth.testState" @click="navigateTo({name: 'about'})">
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
           <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="logout">

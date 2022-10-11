@@ -1,7 +1,6 @@
 const Tweet = require('mongoose').model('Tweet')
 
 module.exports = {
-    //async when adding promise call to db
     async index (req,res) {
         try {  
             const tweets = await Tweet.find({ annotators : {$ne : req.headers.user}, numberOfAnnotations: { $lt: 5}, flag: { $exists:false }}, null, { sort: { numberOfAnnotations: -1 }}).limit(req.headers.indexlength).exec()
@@ -48,7 +47,7 @@ module.exports = {
     },
     async flagTweet (req,res) {
         try {  
-            await Tweet.findOneAndUpdate({_id : req.body.tweetId},  { $push : {annotators : req.body.user}, $set : {flag : req.body.flag}})
+            await Tweet.findOneAndUpdate({_id : req.body.tweetId},  {$set : {flag : req.body.flag}})
             res.send("tweet flagged")
         } catch (err){
             res.status(500).send({

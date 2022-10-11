@@ -180,5 +180,8 @@ annotationRoutes(app)
 var testRoutes = require('./app/routes/test.routes')
 testRoutes(app)
 
+var flagRoutes = require('./app/routes/flag.routes')
+flagRoutes(app)
+
 mySeeder()
 app.listen(process.env.PORT)

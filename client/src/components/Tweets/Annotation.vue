@@ -1,9 +1,7 @@
 <template>
   <v-container> 
   <v-layout row>
-    <v-flex >
       <tweets-panel></tweets-panel>
-    </v-flex>
   </v-layout>
 </v-container>
 </template>

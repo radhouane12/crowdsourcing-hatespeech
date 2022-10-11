@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import LandingPage from '../components/LandingPage'
 import Annotation from '../components/Tweets/Annotation'
 import Test from '../components/Test/Test'
+import Flags from '../components/Flags/Flags'
+import About from '../components/About'
+import Dictionaries from '../components/Dictionaries/Dictionaries'
+import Statistics from '../components/Statistics/Statistics'
 import store from "../store/store"
 
 Vue.use(Router)
@@ -23,6 +27,26 @@ const router = new Router({
       path: '/test',
       name: 'testPage',
       component: Test,
+    },
+    {
+      path: '/dictionaries',
+      name: 'dictionaries',
+      component: Dictionaries,
+    },
+    {
+      path: '/flags',
+      name: 'flags',
+      component: Flags,
+    },
+    {
+      path: '/statistics',
+      name: 'statistics',
+      component: Statistics,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
     }
   ]
 })
