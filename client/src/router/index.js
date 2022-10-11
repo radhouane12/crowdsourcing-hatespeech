@@ -23,7 +23,6 @@ const router = new Router({
       path: '/test',
       name: 'testPage',
       component: Test,
-      //ADD a BeforeEnter where it's only allowed if from register, otherwise forward to annotation
     }
   ]
 })

@@ -10,7 +10,8 @@
         <v-btn v-if="$store.state.auth.testState" dark small contained depressed @click="quitTest">
           Quit Test
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text>
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert"
+          dark small text>
           Flags
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1"
@@ -23,10 +24,15 @@
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small class="ml-1" text>
           Statistics
         </v-btn>
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState  && !$store.state.auth.isExpert"
+          dark small text @click="beExpert()">
+          Become Expert
+        </v-btn>
         <v-btn v-if="!$store.state.auth.testState" dark small text class="ml-1">
           About
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small contained depressed class="ml-5" @click="logout">
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small contained depressed
+          class="ml-5" @click="logout">
           Sign out
         </v-btn>
       </div>
@@ -40,10 +46,12 @@
           <v-list-item v-if="$store.state.auth.testState" @click="quitTest">
             <v-list-item-title>Quit Test</v-list-item-title>
           </v-list-item>
-          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
+          <v-list-item
+            v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert">
             <v-list-item-title>Flags</v-list-item-title>
           </v-list-item>
-          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="navigateTo({name: 'annotation'})">
+          <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState"
+            @click="navigateTo({name: 'annotation'})">
             <v-list-item-title>Annotation</v-list-item-title>
           </v-list-item>
           <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
@@ -51,6 +59,11 @@
           </v-list-item>
           <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState">
             <v-list-item-title>Statistics</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && !$store.state.auth.isExpert"
+            @click="beExpert()">
+            <v-list-item-title>Become Expert</v-list-item-title>
           </v-list-item>
           <v-list-item v-if="!$store.state.auth.testState">
             <v-list-item-title>About</v-list-item-title>
@@ -75,7 +88,7 @@ export default {
   },
   computed: {
     windowIsBigEnough() {
-      return this.windowWidth > 948
+      return this.windowWidth > 1010
     }
   },
   methods: {
@@ -103,8 +116,17 @@ export default {
       }
     },
     quitTest() {
+      if (localStorage.i)  localStorage.removeItem("i")
+      if (localStorage.score)  localStorage.removeItem("score")
       this.$store.dispatch('testState', false)
       this.$router.push({ name: 'annotation' }).catch(error => {
+        if (error.name != "NavigationDuplicated") {
+          throw error;
+        }
+      })
+    },
+    beExpert() {
+      this.$router.push({ name: 'testPage' }).catch(error => {
         if (error.name != "NavigationDuplicated") {
           throw error;
         }

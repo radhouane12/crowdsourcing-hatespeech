@@ -107,6 +107,7 @@ export default {
     },
     methods: {
         start(){
+            this.$store.dispatch('testState', true)
             this.i=1
             localStorage.i = this.i
         },

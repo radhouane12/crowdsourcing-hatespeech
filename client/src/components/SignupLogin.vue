@@ -319,7 +319,6 @@ export default {
                             }
                         })
                     } else {
-                        this.$store.dispatch('testState', true)
                         this.$router.push({ name: 'testPage' }).catch(error => {
                             if (error.name != "NavigationDuplicated") {
                                 throw error;
