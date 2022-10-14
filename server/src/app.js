@@ -11,9 +11,12 @@ dotenv.config()
 var db = mongoose(process.env.DB_CONNECT);
 const app = express()
 
+
+
 //adding initial data
 const Tweet = require('mongoose').model('Tweet')
-async function mySeeder() {
+const Dictionary = require('mongoose').model('Dictionary')
+async function initialTweets() {
     const data = await Tweet.find()
     if (data.length !== 0) {
         return
@@ -51,118 +54,154 @@ async function mySeeder() {
             "created_at": "2022-10-04",
             "tweet": "@lilygrutcher Russians threatening Mexicans in race to expatriate!",
             "category": [
-             "Ethnicity"
+                "Ethnicity"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "Expatriate Group To Revolutionise Health Insurance with a New Cashless Offering  https://t.co/0cOQm6VOmd",
             "category": [
-             "Ethnicity"
+                "Ethnicity"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "The line between being an expatriate and an immigrant is finer than we imagine. Speaking from personal experiencesz Poem by Edwin Alanis Garcia #poem #expatriate #immigrant  https://t.co/gf8x40f2i2",
             "category": [
-             "Ethnicity"
+                "Ethnicity"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "Ahem. As I was saying, I remain Snezhnaya\u2019s greatest expatriate toy seller, currently attached to the Liyue Branch of our Institute for Toy Research!",
             "category": [
-             "Ethnicity"
+                "Ethnicity"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "One group is called herders. Another is called ranchers. They are doing the exact same thing - livestock farming.  (this reminds me of immigrant vs expatriate)",
             "category": [
-             "Ethnicity"
+                "Ethnicity"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "I want diana vickers as a loose woman essentially",
             "category": [
-             "Gender"
+                "Gender"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "I started a Substack called \"Myth and Marvelous\" inspired by a line in \"Loose Woman\" by Sandra Cisneros and Rene Menil's writings on the marvelous (give me a follow - still trying to figure out how this works):  https://t.co/uilw9q9ZPn",
             "category": [
-             "Gender"
+                "Gender"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-03",
             "tweet": "@WesMillerLaw @spicyrocks69 Doesn\u2019t matter what core they are. Woman showing her body and/or expressing her sexuality = loose woman, to they eyes of the beholding Vatnik",
             "category": [
-             "Gender"
+                "Gender"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-03",
             "tweet": "@PrincessPinocch I thought it's  a pic of that loose woman ..Denise Welch",
             "category": [
-             "Gender"
+                "Gender"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "@hungryayo Professional bad bitch fumbler",
             "category": [
-             "Religion"
+                "Religion"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "i\u2019m either the biggest bag fumbler of all time or the biggest bag grabber",
             "category": [
-             "Religion"
+                "Religion"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "@Emohjify @WannaBeReece bro a bag fumbler",
             "category": [
-             "Religion"
+                "Religion"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "@wydccalamity not gon argue buh i\u2019m a certified bad bitch fumbler",
             "category": [
-             "Religion"
+                "Religion"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-04",
             "tweet": "@LoftforWords Seny: 7 (Not challenged much) Paal: 8 Dunne: 7.5 Balogun: 8.5 Laird: 6.5, Poor-ish first half Field: 9 Dozzell: 5 Amos: 6 Willock: 7.5 Chair: 8, weapon all day Roberts: 6 Dykes: 5, Mostly just had it thumped at him w/ no support Iroegbunam: 6 JCS: 7 Albert: NA, not enough action",
             "category": [
-             "Sexuality"
+                "Sexuality"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-02",
             "tweet": "Bruv it\u2019s funny asf dykes in SA be dry hating like a mf. \ud83e\udd71",
             "category": [
-             "Sexuality"
+                "Sexuality"
             ]
-           },
-           {
+        },
+        {
             "created_at": "2022-10-01",
             "tweet": "the first two dykes and a mic \ud83d\udeac\ud83d\udeac\ud83d\udeac  https://t.co/lxtB2v187d",
             "category": [
-             "Sexuality"
+                "Sexuality"
             ]
-           }
+        }
     ]
     items.forEach(async function (item) {
         var tweet = new Tweet(item)
         await tweet.save()
+    })
+}
+async function initialDictionary() {
+    const dicts = await Dictionary.find()
+    if (dicts.length !== 0) {
+        return
+    }
+    const dict = [
+        {
+            "category": "Disability",
+            "vocabulary": ["fish wagon", "gimp", "gimps"]
+        },
+        {
+            "category": "Gender",
+            "vocabulary": ["street girl", "loose woman", "gimps"]
+        },
+        {
+            "category": "Race",
+            "vocabulary": ["arabic", "african"]
+        },
+        {
+            "category": "Religion",
+            "vocabulary": ["fumbler", "brain damage"]
+        },
+        {
+            "category": "Sexuality",
+            "vocabulary": ["dyke", "dykes", "feminazi"]
+        },
+        {
+            "category": "Ethnicity",
+            "vocabulary": ["refugee", "expatriate", "transmigrant"]
+        }
+    ]
+    dict.forEach(async function (item) {
+        var dictionary = new Dictionary(item)
+        await dictionary.save()
     })
 }
 
@@ -180,8 +219,15 @@ annotationRoutes(app)
 var testRoutes = require('./app/routes/test.routes')
 testRoutes(app)
 
+var DictionaryRoutes = require('./app/routes/Dictionary.routes')
+DictionaryRoutes(app)
+
 var flagRoutes = require('./app/routes/flag.routes')
 flagRoutes(app)
 
-mySeeder()
+
+
+initialDictionary()
+initialTweets()
+require('./cron/DailyDataFetcher')();
 app.listen(process.env.PORT)

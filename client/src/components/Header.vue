@@ -6,31 +6,31 @@
       </div>
       <v-spacer></v-spacer>
       <div v-if="windowIsBigEnough">
-        <v-btn v-if="$store.state.auth.testState" dark small contained depressed @click="quitTest">
+        <v-btn v-if="$store.state.auth.testState" dark  contained depressed @click="quitTest">
           Quit Test
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert"
-          dark small text @click="navigateTo({name: 'flags'})">
+          dark  text @click="navigateTo({name: 'flags'})">
           Flags
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1"
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark  text class="ml-1"
           @click="navigateTo({name: 'annotation'})">
           Annotation
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small text class="ml-1"   @click="navigateTo({name: 'dictionaries'})">
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark  text class="ml-1"   @click="navigateTo({name: 'dictionaries'})">
           Dictionaries
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small class="ml-1" text   @click="navigateTo({name: 'statistics'})">
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark  class="ml-1" text   @click="navigateTo({name: 'statistics'})">
           Statistics
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState  && !$store.state.auth.isExpert"
-          dark small text @click="beExpert()">
+          dark  text @click="beExpert()">
           Become Expert
         </v-btn>
-        <v-btn v-if="!$store.state.auth.testState" dark small text class="ml-1"  @click="navigateTo({name: 'about'})">
+        <v-btn v-if="!$store.state.auth.testState" dark  text class="ml-1"  @click="navigateTo({name: 'about'})">
           About
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark small contained depressed
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark  contained depressed
           class="ml-5" @click="logout">
           Sign out
         </v-btn>

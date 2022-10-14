@@ -8,5 +8,6 @@ module.exports=function(DB_CONNECT) {
     require('../app/models/user.model');
     require('../app/models/refreshToken.model');
     require('../app/models/tweet.model');
+    require('../app/models/dictionary.model');
     return db;
 };

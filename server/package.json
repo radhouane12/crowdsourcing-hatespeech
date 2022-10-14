@@ -21,7 +21,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "node-cron": "^3.0.2",
+    "nodemon": "^2.0.20",
+    "python-shell": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^8.24.0",
