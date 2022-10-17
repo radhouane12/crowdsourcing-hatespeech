@@ -9,5 +9,6 @@ module.exports=function(DB_CONNECT) {
     require('../app/models/refreshToken.model');
     require('../app/models/tweet.model');
     require('../app/models/dictionary.model');
+    require('../app/models/suggestion.model');
     return db;
 };

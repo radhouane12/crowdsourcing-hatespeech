@@ -6,8 +6,8 @@ const bcrypt = require ('bcrypt')
 
 //create JWT Token
 function createAccessToken (user) {
-    const HALF_HOUR = 60*30
-    return jwt.sign ({ user, exp: Math.floor(Date.now() / 1000) + HALF_HOUR}, process.env.JWT_SECRET_ACCESS)
+    const ONE_HOUR = 60*60
+    return jwt.sign ({ user, exp: Math.floor(Date.now() / 1000) + ONE_HOUR}, process.env.JWT_SECRET_ACCESS)
 }
 function createRefreshToken (user) {
     return jwt.sign (user, process.env.JWT_SECRET_REFRESH)

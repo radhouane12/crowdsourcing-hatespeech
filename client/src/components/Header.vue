@@ -87,7 +87,7 @@ export default {
   },
   computed: {
     windowIsBigEnough() {
-      return this.windowWidth > 1010
+      return this.windowWidth > 1115
     }
   },
   methods: {

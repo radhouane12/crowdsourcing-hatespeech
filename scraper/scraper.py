@@ -66,8 +66,8 @@ for i in data:
         config.Search = j
         config.Store_json = True
         today = datetime.date.today()
-        yesterday = str(today - datetime.timedelta(days=106))
-        dayBefore =  str(today - datetime.timedelta(days=107))
+        yesterday = str(today - datetime.timedelta(days=1))
+        dayBefore =  str(today - datetime.timedelta(days=2))
         config.Since = dayBefore + " 22:00:00" ## Local time is UTC+2 ==> to be changed to 23:00:00 in winter time 
         config.Until = yesterday + " 22:00:00" ##
         config.Limit = 200
