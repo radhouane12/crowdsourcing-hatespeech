@@ -10,5 +10,6 @@ module.exports=function(DB_CONNECT) {
     require('../app/models/tweet.model');
     require('../app/models/dictionary.model');
     require('../app/models/suggestion.model');
+    require('../app/models/annotatedTweet.model');
     return db;
 };

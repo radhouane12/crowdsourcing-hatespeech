@@ -9,6 +9,8 @@ import Dictionaries from '../components/Dictionaries/Dictionaries'
 import Statistics from '../components/Statistics/Statistics'
 import store from "../store/store"
 
+
+
 Vue.use(Router)
 
 const router = new Router({

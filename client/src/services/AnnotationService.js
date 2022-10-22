@@ -52,6 +52,7 @@ export default {
         return Api.createAxiosRequest().post('labelTweet',tweetInfo,{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
+              'isexpert': store.state.auth.isExpert
             }
         })
     },

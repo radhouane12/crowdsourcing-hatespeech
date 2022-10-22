@@ -9,13 +9,13 @@
         <v-btn v-if="$store.state.auth.testState" dark  contained depressed @click="quitTest">
           Quit Test
         </v-btn>
-        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert"
-          dark  text @click="navigateTo({name: 'flags'})">
-          Flags
-        </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark  text class="ml-1"
           @click="navigateTo({name: 'annotation'})">
           Annotation
+        </v-btn>
+        <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert"
+          dark  text @click="navigateTo({name: 'flags'})">
+          Flags
         </v-btn>
         <v-btn v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" dark  text class="ml-1"   @click="navigateTo({name: 'dictionaries'})">
           Dictionaries
@@ -45,13 +45,13 @@
           <v-list-item v-if="$store.state.auth.testState" @click="quitTest">
             <v-list-item-title>Quit Test</v-list-item-title>
           </v-list-item>
-          <v-list-item
-            v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert" @click="navigateTo({name: 'flags'})">
-            <v-list-item-title>Flags</v-list-item-title>
-          </v-list-item>
           <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState"
             @click="navigateTo({name: 'annotation'})">
             <v-list-item-title>Annotation</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState && $store.state.auth.isExpert" @click="navigateTo({name: 'flags'})">
+            <v-list-item-title>Flags</v-list-item-title>
           </v-list-item>
           <v-list-item v-if="$store.state.auth.isUserLoggedIn && !$store.state.auth.testState" @click="navigateTo({name: 'dictionaries'})">
             <v-list-item-title>Dictionaries</v-list-item-title>

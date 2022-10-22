@@ -120,7 +120,7 @@ import DictionaryService from '../../services/DictionaryService'
 export default {
     data() {
         return {
-            showSuggestions: false || localStorage.showSuggestions,
+            showSuggestions: false || (localStorage.showSuggestions && this.$store.state.auth.isExpert),
             newTerm: '',
             search: '',
             items: ['Gender', 'Sexuality', 'Ethnicity', 'Religion', 'Race', 'Disability'],
@@ -161,6 +161,10 @@ export default {
     },
     methods: {
         reviewSuggestions() {
+            if (!this.$store.state.auth.isExpert) {
+                this.showSuggestions = false
+                return
+            }
             if (this.showSuggestions) {
                 this.showSuggestions = false
                 localStorage.removeItem("showSuggestions")

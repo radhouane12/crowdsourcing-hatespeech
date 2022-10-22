@@ -2,7 +2,7 @@
   <v-card class="card" @mouseover="hover = true" @mouseleave="hover = false" hover outlined>
     <v-card-text>
       <span class="text-h8 text--primary">
-        "{{passedTweet.tweet}}"
+        {{passedTweet.tweet}}
       </span>
       <br>
       <span class="grey--text" style="font-size:x-small;" v-if="hover || isOpened">Posted on
@@ -116,7 +116,7 @@ export default {
       this.$emit('skipTweet', this.passedTweet._id)
     },
     submit() {
-      var convertedLabels = this.labels.map(item=> item==0 ? 'Hateful' : item==1 ? 'Abusive' : item==2 ? 'Neutral' :item==3 ? 'spam' :item==4 ? 'Threat' :'')
+      var convertedLabels = this.labels.map(item=> item==0 ? 'Hateful' : item==1 ? 'Abusive' : item==2 ? 'Neutral' :item==3 ? 'Spam' :item==4 ? 'Threat' :'')
       convertedLabels = convertedLabels.filter(Boolean);
       if (this.additionalLabel) convertedLabels.push(this.additionalLabel)
       this.$emit('submit', {'tweetId' :this.passedTweet._id, "labels": convertedLabels})

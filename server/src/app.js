@@ -108,6 +108,9 @@ DictionaryRoutes(app)
 var flagRoutes = require('./app/routes/flag.routes')
 flagRoutes(app)
 
+var StatisticRoutes = require('./app/routes/statistic.routes')
+StatisticRoutes(app)
+
 
 
 initialDictionary()
