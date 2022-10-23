@@ -4,10 +4,16 @@ const AnnotatedTweet = require('mongoose').model('annotatedTweet')
 module.exports = {
     async index(req, res) {
         try {
-            const tweets = await Tweet.find({ annotators: { $ne: req.headers.user }, numberOfAnnotations: { $lt: 5 }, flag: { $exists: false } }, null, { sort: { numberOfAnnotations: -1 } }).limit(req.headers.indexlength).exec()
+            var tweets = []
+            let i = 4
+            while (tweets.length < req.headers.indexlength) {
+                tweets.push(...(await Tweet.find({ annotators: { $ne: req.headers.user }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
+                i--
+            }
+            tweets = tweets.sort(() => 0.5 - Math.random())
+            tweets = tweets.slice(0,req.headers.indexlength)
             res.send(tweets)
         } catch (err) {
-            console.log(err)
             res.status(500).send({
                 error: "Couldn't fetch tweets"
             })
@@ -16,9 +22,20 @@ module.exports = {
     async getOne(req, res) {
         try {
             const categories = req.body.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
-            const tweet = await Tweet.findOne({ annotators: { $ne: req.headers.user }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $lt: 5 }, flag: { $exists: false } }, null, { sort: { numberOfAnnotations: -1 } }).skip(req.headers.skipnumber).exec()
-            res.send(tweet)
+            console.log("hello")
+            var tweets = []
+            let i = 4
+            while (tweets.length < 1) { 
+                tweets.push(...(await Tweet.find({ annotators: { $ne: req.headers.user }, _id: { $nin: req.body.alreadyViewed }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
+                console.log (tweets)
+                i--
+            }
+            console.log (tweets)
+            tweets = tweets.sort(() => 0.5 - Math.random())
+            console.log(tweets[0])
+            res.send(tweets[0])
         } catch (err) {
+            console.log (err)
             res.status(500).send({
                 error: "Couldn't fetch tweet"
             })
@@ -37,7 +54,15 @@ module.exports = {
     async getFiltered(req, res) {
         try {
             const categories = req.body.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
-            const tweets = await Tweet.find({ annotators: { $ne: req.body.user }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $lt: 5 }, flag: { $exists: false } }, null, { sort: { numberOfAnnotations: -1 } }).limit(req.body.len).exec()
+            var tweets = []
+            let i = 4
+            while (tweets.length < req.body.len) {
+                tweets.push(...(await Tweet.find({ annotators: { $ne: req.body.user }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
+                i--
+            }
+            console.log (tweets)
+            tweets = tweets.sort(() => 0.5 - Math.random())
+            tweets = tweets.slice(0,req.body.len)
             res.send(tweets)
         } catch (err) {
             console.log(err)
@@ -71,12 +96,12 @@ module.exports = {
             let updatedtweet = await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $push: { annotators: req.body.user, labels: { $each: req.body.labels } }, $inc: { numberOfAnnotations: 1 } }, {
                 new: true
             })
-            if (req.headers.isexpert) {
+            if (req.headers.isexpert == "true") {
                 updatedtweet = await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $push: { labels: { $each: req.body.labels } }, $inc: { numberOfAnnotations: 1 } }, {
                     new: true
                 })
             }
-            if (updatedtweet.numberOfAnnotations >= 2) {
+            if (updatedtweet.numberOfAnnotations >= 5) {
                 let trackObj = {}
                 updatedtweet.labels.forEach(cur => {
                     if (!trackObj[cur])

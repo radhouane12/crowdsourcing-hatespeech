@@ -11,12 +11,11 @@ export default {
             }
         })
     },
-    getOne (user,i,filters) {
+    getOne (user,filters) {
         return Api.createAxiosRequest().post('getOne',filters,{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
               'user': user,
-              'skipnumber' : i,
             }
         })
     },   
