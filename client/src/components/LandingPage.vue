@@ -2,12 +2,12 @@
     <v-container class="my-10">
         <v-layout row>
             <v-flex xs12 md6>
-                <v-sheet color="deep-purple" elevation="1" height="400" outlined rounded shaped>
-                    <img :src="require('../assets/background.jpg')"
-                        style="max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%;" />
-                    <!-- <p class="my-3 mx-4" style="color:black">
-                        This is a text about the platform
-                    </p>  -->
+                <v-sheet id="side-sheet" elevation="1" outlined rounded shaped>
+                    <!-- <img :src="require('../assets/background.jpg')"
+                        style="max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%;" /> -->
+                    <div id="text" class="mx-6" style="color:white">
+                        Combat Hate was built to ...
+                    </div>
                 </v-sheet>
             </v-flex>
             <v-flex></v-flex>
@@ -30,5 +30,11 @@ export default {
 </script>
 
 <style scoped>
-
+#side-sheet {
+    background: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('../assets/background.jpg') no-repeat;
+    background-size: 100% 100%;
+    height: 300px;
+    display: table-cell;
+    vertical-align: middle;
+}
 </style>

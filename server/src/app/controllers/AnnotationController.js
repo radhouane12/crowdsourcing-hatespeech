@@ -22,20 +22,15 @@ module.exports = {
     async getOne(req, res) {
         try {
             const categories = req.body.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
-            console.log("hello")
             var tweets = []
             let i = 4
             while (tweets.length < 1) { 
                 tweets.push(...(await Tweet.find({ annotators: { $ne: req.headers.user }, _id: { $nin: req.body.alreadyViewed }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
-                console.log (tweets)
                 i--
             }
-            console.log (tweets)
             tweets = tweets.sort(() => 0.5 - Math.random())
-            console.log(tweets[0])
             res.send(tweets[0])
         } catch (err) {
-            console.log (err)
             res.status(500).send({
                 error: "Couldn't fetch tweet"
             })
@@ -60,12 +55,10 @@ module.exports = {
                 tweets.push(...(await Tweet.find({ annotators: { $ne: req.body.user }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
                 i--
             }
-            console.log (tweets)
             tweets = tweets.sort(() => 0.5 - Math.random())
             tweets = tweets.slice(0,req.body.len)
             res.send(tweets)
         } catch (err) {
-            console.log(err)
             res.status(500).send({
                 error: "Couldn't fetch filtered tweets"
             })
