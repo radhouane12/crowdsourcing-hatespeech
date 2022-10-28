@@ -105,7 +105,6 @@ export default {
     },
     methods: {
         async getReplacement() {
-            let i = 0
             const alreadyViewed = this.tweets.map(element => element._id)
             let replacement = (await AnnotationService.getOne(this.$store.state.auth.user._id,
                 {

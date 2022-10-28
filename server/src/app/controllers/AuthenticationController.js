@@ -6,11 +6,12 @@ const bcrypt = require ('bcrypt')
 
 //create JWT Token
 function createAccessToken (user) {
-    const ONE_HOUR = 60*60
+    const ONE_HOUR =60*60
     return jwt.sign ({ user, exp: Math.floor(Date.now() / 1000) + ONE_HOUR}, process.env.JWT_SECRET_ACCESS)
 }
 function createRefreshToken (user) {
-    return jwt.sign (user, process.env.JWT_SECRET_REFRESH)
+    const ONE_WEEK =60*60*24*7
+    return jwt.sign ({ user, exp: Math.floor(Date.now() / 1000) + ONE_WEEK}, process.env.JWT_SECRET_REFRESH)
 }
 
 module.exports = {
@@ -63,7 +64,7 @@ module.exports = {
                 })
             }
             //Validate password 
-            const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
+            const isPasswordValid = await bcrypt.compare(password, user.password)
             if (!isPasswordValid) {
                 return res.status(403).send({
                     error: 'The login info was incorrect'
@@ -112,9 +113,12 @@ module.exports = {
                 return res.sendStatus(403)
             }
             try {
-                jwt.verify(receivedToken, process.env.JWT_SECRET_REFRESH, (err, user) => {
+                jwt.verify(receivedToken, process.env.JWT_SECRET_REFRESH, async (err, user) => {
                     if (err) {
                         console.log("forbidden because not verified")
+                        await RefreshToken.findOneAndDelete({
+                            token: receivedToken
+                        })
                         return res.sendStatus(403)
                     }
                     const accessToken = createAccessToken (user)

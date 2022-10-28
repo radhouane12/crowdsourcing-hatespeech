@@ -9,9 +9,9 @@
       </v-content>
       <v-footer  fixed>
         <v-spacer></v-spacer>
-          <v-text class="deep-purple--text">
+          <span class="text">
             {{ new Date().getFullYear() }}   —   <strong>Combat Hate</strong>
-          </v-text>
+          </span>
           <v-spacer></v-spacer>
       </v-footer>
     </main>
@@ -33,5 +33,8 @@ export default {
 #app {
   background: url('./assets/W.png') no-repeat center center fixed;
   background-size: cover;
+}
+.text {
+  color: #673AB7;
 }
 </style>
