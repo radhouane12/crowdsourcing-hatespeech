@@ -7,11 +7,33 @@
                     <v-icon color="white" left>
                         mdi-twitter
                     </v-icon>
+                    <v-spacer></v-spacer>
+                    <v-btn class="elevation-0" color="deep-purple" fab small @click.prevent="help = true">
+                        <v-icon color="white" center >
+                            mdi-help-circle-outline
+                        </v-icon>
+                    </v-btn>
+                    <v-dialog v-model="help" width="70%">
+                        <v-card>
+                            <v-card-title class="text-h6">
+                                how to
+                            </v-card-title>
+                            <v-card-text>
+                                bla bla
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn text color="purple" @click="help = false">
+                                    Ok
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
                 </v-toolbar>
                 <div id="filters" class="ma-2">
                     <v-row align-content="center">
                         <v-spacer></v-spacer>
-                        <v-col cols="11" sm="5">
+                        <v-col cols="11" sm="5" xl="4">
                             <v-chip-group v-model="categories" column multiple>
                                 <v-chip small filter outlined color="deep-purple">
                                     Gender
@@ -93,15 +115,17 @@ export default {
             date: '2020-01-01',
             menu: false,
             categories: [0, 1, 2, 3, 4, 5],
+            help: false,
         }
     },
     computed: {
         async tweetsAvailable() {
             if (!this.tweets && !this.noTweetsLeftAtDb) {
                 this.tweets = (await AnnotationService.index({
-                    type: "normal", filterLength: 
-                    this.filterLength, 
-                    user: this.$store.state.auth.user._id})
+                    type: "normal", filterLength:
+                        this.filterLength,
+                    user: this.$store.state.auth.user._id
+                })
                 ).data
             }
             return this.tweets
@@ -111,13 +135,14 @@ export default {
         async getReplacement() {
             const alreadyViewed = this.tweets.map(element => element._id)
             let replacement = (await AnnotationService.index({
-                type: "single", 
-                filterLength: this.filterLength, 
+                type: "single",
+                filterLength: this.filterLength,
                 user: this.$store.state.auth.user._id,
                 date: this.date,
                 categories: this.categories,
-                alreadyViewed: alreadyViewed}))
-            .data
+                alreadyViewed: alreadyViewed
+            }))
+                .data
             if (replacement) {
                 this.tweets.push(replacement)
             } else {
@@ -126,12 +151,13 @@ export default {
         },
         async applyFilters() {
             this.tweets = (await AnnotationService.index({
-                type: "filtered", 
-                filterLength: this.filterLength, 
+                type: "filtered",
+                filterLength: this.filterLength,
                 user: this.$store.state.auth.user._id,
                 date: this.date,
-                categories: this.categories}))
-            .data
+                categories: this.categories
+            }))
+                .data
         },
         async skip(id) {
             const pos = this.tweets.map(tweet => tweet._id).indexOf(id)

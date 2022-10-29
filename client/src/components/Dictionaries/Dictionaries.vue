@@ -4,6 +4,8 @@
             <v-spacer></v-spacer>
             <v-col>
                 <v-card v-if="fetchDicts" class="card" width="500" outlined elevation="1">
+                    <div class="ma-3 inputtext">Terms and experessions that already exist in our dictionaries and are being targeted in the daily tweet search
+                    </div>
                     <v-card-title>
                         <v-text-field outlined v-model="search" append-icon="search" label="Search" single-line
                             hide-details>
@@ -21,7 +23,8 @@
                         <div class="ma-3 inputtext">You can add a new Term or Expression that will be targeted in
                             our
                             tweets search. This new expression will have to be first validated by one of our expert
-                            users.</div>
+                            users.
+                        </div>
                         <v-card-text>
                             <v-form>
                                 <v-text-field label="Suggested Term / Expression" type="text" v-model="newTerm">
@@ -47,7 +50,9 @@
         <v-row v-if="!showSuggestions && this.$vuetify.breakpoint.mdAndDown" class="mb-5">
             <v-spacer></v-spacer>
             <v-card v-if="fetchDicts" class="card" width="500" outlined elevation="1">
+                <div class="ma-3 inputtext">Terms and experessions that already exist in our dictionaries and are being targeted in the daily tweet search</div>
                 <v-card-title>
+                    
                     <v-text-field outlined v-model="search" append-icon="search" label="Search" single-line
                         hide-details>
                     </v-text-field>
@@ -205,6 +210,7 @@ export default {
 }
 
 .inputtext {
+    font-size: 16px;
     font-weight: bold;
 }
 </style>
