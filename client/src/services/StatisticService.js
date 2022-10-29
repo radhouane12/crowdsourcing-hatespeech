@@ -3,31 +3,12 @@ import store from '../store/store'
 
 
 export default {
-  getUsers() {
-    return Api.createAxiosRequest().get('getUsers', {
+  getStats(stats) {
+    const query = encodeURIComponent(JSON.stringify(stats))
+    return Api.createAxiosRequest().get(`getStats?query=${query}`, {
       headers: {
-        'Authorization': "Bearer " + store.state.auth.accessToken,
-        'user': store.state.auth.user._id
+        'Authorization': "Bearer " + store.state.auth.accessToken
       }
-    })
-  },
-  getAnnotated(categories) {
-    return Api.createAxiosRequest().get('getAnnotated', {
-      headers: {
-        'Authorization': "Bearer " + store.state.auth.accessToken,
-        'user': store.state.auth.user._id,
-        'categories': categories
-      },
-    })
-  },
-  getTrends(categories,monthly) {
-    return Api.createAxiosRequest().get('getTrends', {
-      headers: {
-        'Authorization': "Bearer " + store.state.auth.accessToken,
-        'user': store.state.auth.user._id,
-        'categories': categories,
-        'monthly': monthly
-      },
     })
   },
 }

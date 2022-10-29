@@ -98,7 +98,11 @@ export default {
     computed: {
         async tweetsAvailable() {
             if (!this.tweets && !this.noTweetsLeftAtDb) {
-                this.tweets = (await AnnotationService.index(this.filterLength, this.$store.state.auth.user._id)).data
+                this.tweets = (await AnnotationService.index({
+                    type: "normal", filterLength: 
+                    this.filterLength, 
+                    user: this.$store.state.auth.user._id})
+                ).data
             }
             return this.tweets
         },
@@ -106,12 +110,14 @@ export default {
     methods: {
         async getReplacement() {
             const alreadyViewed = this.tweets.map(element => element._id)
-            let replacement = (await AnnotationService.getOne(this.$store.state.auth.user._id,
-                {
-                    "date": this.date,
-                    "categories": this.categories,
-                    "alreadyViewed": alreadyViewed
-                })).data
+            let replacement = (await AnnotationService.index({
+                type: "single", 
+                filterLength: this.filterLength, 
+                user: this.$store.state.auth.user._id,
+                date: this.date,
+                categories: this.categories,
+                alreadyViewed: alreadyViewed}))
+            .data
             if (replacement) {
                 this.tweets.push(replacement)
             } else {
@@ -119,12 +125,13 @@ export default {
             }
         },
         async applyFilters() {
-            this.tweets = (await AnnotationService.getFiltered({
-                "user": this.$store.state.auth.user._id,
-                "date": this.date,
-                "categories": this.categories,
-                "len": this.filterLength
-            })).data
+            this.tweets = (await AnnotationService.index({
+                type: "filtered", 
+                filterLength: this.filterLength, 
+                user: this.$store.state.auth.user._id,
+                date: this.date,
+                categories: this.categories}))
+            .data
         },
         async skip(id) {
             const pos = this.tweets.map(tweet => tweet._id).indexOf(id)

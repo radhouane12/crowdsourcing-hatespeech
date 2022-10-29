@@ -16,7 +16,6 @@ module.exports = {
     async keepTweet (req,res) {
         try {
             const kept =  await Tweet.findByIdAndUpdate(req.body.id, { $unset : { flag : 1} })
-            
             res.send(kept)
         } catch (err){
             console.log(err)

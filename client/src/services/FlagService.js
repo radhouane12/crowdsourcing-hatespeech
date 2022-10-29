@@ -7,7 +7,6 @@ export default {
         return Api.createAxiosRequest().get('getFlagged',{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
-              'user': store.state.auth.user._id
             }
         })
     },
@@ -15,7 +14,6 @@ export default {
         return Api.createAxiosRequest().post('keepTweet',tweetId,{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
-              'user': store.state.auth.user._id
             }
         })
     },
@@ -23,7 +21,6 @@ export default {
         return Api.createAxiosRequest().delete('deleteTweet',{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
-              'user': store.state.auth.user._id
             },data: tweetId})
     },
     

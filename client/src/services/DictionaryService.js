@@ -7,7 +7,6 @@ export default {
     return Api.createAxiosRequest().get('getDicts', {
       headers: {
         'Authorization': "Bearer " + store.state.auth.accessToken,
-        'user': store.state.auth.user._id
       }
     })
   },
@@ -15,7 +14,6 @@ export default {
     return Api.createAxiosRequest().get('getSuggs', {
       headers: {
         'Authorization': "Bearer " + store.state.auth.accessToken,
-        'user': store.state.auth.user._id
       }
     })
   },

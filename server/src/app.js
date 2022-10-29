@@ -38,5 +38,5 @@ StatisticRoutes(app)
 
 
 require('./DB/dictSeeder')();
-//require('./cron/DailyDataFetcher')();
+require('./cron/DailyDataFetcher')();
 app.listen(process.env.PORT)

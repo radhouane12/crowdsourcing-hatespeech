@@ -3,37 +3,62 @@ const AnnotatedTweet = require('mongoose').model('annotatedTweet')
 
 module.exports = {
     async index(req, res) {
-        try {
-            var tweets = []
-            let i = 4
-            while (tweets.length < req.headers.indexlength) {
-                tweets.push(...(await Tweet.find({ annotators: { $ne: req.headers.user }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
-                i--
-            }
-            tweets = tweets.sort(() => 0.5 - Math.random())
-            tweets = tweets.slice(0,req.headers.indexlength)
-            res.send(tweets)
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't fetch tweets"
-            })
-        }
-    },
-    async getOne(req, res) {
-        try {
-            const categories = req.body.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
-            var tweets = []
-            let i = 4
-            while (tweets.length < 1) { 
-                tweets.push(...(await Tweet.find({ annotators: { $ne: req.headers.user }, _id: { $nin: req.body.alreadyViewed }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
-                i--
-            }
-            tweets = tweets.sort(() => 0.5 - Math.random())
-            res.send(tweets[0])
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't fetch tweet"
-            })
+        const query = JSON.parse(req.query.query)
+        switch (query.type) {
+            case 'normal':
+                try {
+                    var tweets = []
+                    let i = 4
+                    while (tweets.length < query.filterLength) {
+                        tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
+                        i--
+                    }
+                    tweets = tweets.sort(() => 0.5 - Math.random())
+                    tweets = tweets.slice(0,query.filterLength)
+                    res.send(tweets)
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't fetch tweets"
+                    })
+                }
+              break;
+            case 'single':
+                try {
+                    const categories = query.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
+                    var tweets = []
+                    let i = 4
+                    while (tweets.length < 1) { 
+                        tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, _id: { $nin: query.alreadyViewed }, created_at: { "$gte": query.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
+                        i--
+                    }
+                    tweets = tweets.sort(() => 0.5 - Math.random())
+                    res.send(tweets[0])
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't fetch tweet"
+                    })
+                }
+              break;
+            case 'filtered':
+                try {
+                    const categories = query.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
+                    var tweets = []
+                    let i = 4
+                    while (tweets.length < query.filterLength) {
+                        tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, created_at: { "$gte": query.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
+                        i--
+                    }
+                    tweets = tweets.sort(() => 0.5 - Math.random())
+                    tweets = tweets.slice(0,query.filterLength)
+                    res.send(tweets)
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't fetch filtered tweets"
+                    })
+                }
+              break;
+            default:
+                res.status(404).send("not found")
         }
     },
     async skipTweet(req, res) {
@@ -43,24 +68,6 @@ module.exports = {
         } catch (err) {
             res.status(500).send({
                 error: "Couldn't update Annotators"
-            })
-        }
-    },
-    async getFiltered(req, res) {
-        try {
-            const categories = req.body.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
-            var tweets = []
-            let i = 4
-            while (tweets.length < req.body.len) {
-                tweets.push(...(await Tweet.find({ annotators: { $ne: req.body.user }, created_at: { "$gte": req.body.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
-                i--
-            }
-            tweets = tweets.sort(() => 0.5 - Math.random())
-            tweets = tweets.slice(0,req.body.len)
-            res.send(tweets)
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't fetch filtered tweets"
             })
         }
     },

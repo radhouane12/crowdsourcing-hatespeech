@@ -246,7 +246,9 @@ export default {
             if (newValue.length == 0) this.pieCategories = [0, 1, 2, 3, 4, 5]
             this.twloaded = false
             this.twData = { Hateful: 0, Abusive: 0, Neutral: 0, Threat: 0, Spam: 0 }
-            const annotatedTweets = (await StatisticService.getAnnotated(this.pieCategories)).data
+            const annotatedTweets = (await StatisticService.getStats({
+                type: "annotations", 
+                categories: this.pieCategories})).data
             if (annotatedTweets) {
                 annotatedTweets.forEach(element => {
                     element.finalLabels.forEach(elem => {
@@ -316,7 +318,10 @@ export default {
                 6: { Hateful: 0, Abusive: 0, Neutral: 0, Threat: 0, Spam: 0 },
                 7: { Hateful: 0, Abusive: 0, Neutral: 0, Threat: 0, Spam: 0 },
             }
-            const trendTweets = (await StatisticService.getTrends(categories, showMonthly)).data
+            const trendTweets = (await StatisticService.getStats({
+                type: "trends", 
+                categories: categories,
+                showMonthly: showMonthly})).data
             if (trendTweets) {
                 for (let i = 1; i <= 7; i++) {
                     trendTweets[i - 1].forEach(element => {
@@ -331,7 +336,8 @@ export default {
     },
     async mounted() {
         try {
-            const users = (await StatisticService.getUsers()).data
+            const users = (await StatisticService.getStats({
+                type: "users"})).data
             if (users) {
                 users.forEach(element => {
                     if (element.isExpert) this.uData["experts"]++
@@ -343,7 +349,9 @@ export default {
             console.error(e)
         }
         try {
-            const annotatedTweets = (await StatisticService.getAnnotated(this.pieCategories)).data
+            const annotatedTweets = (await StatisticService.getStats({
+                type: "annotations", 
+                categories: this.pieCategories})).data
             if (annotatedTweets) {
                 annotatedTweets.forEach(element => {
                     element.finalLabels.forEach(elem => {

@@ -2,25 +2,9 @@ import Api from "@/services/Api"
 import store from '../store/store'
 
 export default {
-    index (length,user) {
-        return Api.createAxiosRequest().get('annotation',{
-            headers: {
-              'Authorization': "Bearer " + store.state.auth.accessToken,
-              'indexLength': length,
-              'user': user,
-            }
-        })
-    },
-    getOne (user,filters) {
-        return Api.createAxiosRequest().post('getOne',filters,{
-            headers: {
-              'Authorization': "Bearer " + store.state.auth.accessToken,
-              'user': user,
-            }
-        })
-    },   
-    getFiltered (filters) {
-        return Api.createAxiosRequest().post('getFiltered',filters,{
+    index (filters) {
+        const query = encodeURIComponent(JSON.stringify(filters))
+        return Api.createAxiosRequest().get(`index?query=${query}`,{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
             }

@@ -3,8 +3,7 @@ const User = require('mongoose').model('User')
 module.exports = {
     async makeExpert (req,res) {
         try {
-
-            await User.findOneAndUpdate({_id : req.headers.user},  { $set : {isExpert : true}})
+            await User.findOneAndUpdate({_id: req.user.user._id},  { $set : {isExpert : true}})
             res.send("User is now an expert")
         } catch (err){
             res.status(500).send({
