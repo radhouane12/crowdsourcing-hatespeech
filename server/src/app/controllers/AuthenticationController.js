@@ -58,17 +58,20 @@ module.exports = {
             const user = await User.findOne({
                 username: username
             })
+            
             if (!user) {
-                return res.status(403)({
-                    error: 'The login info was incorrect'
+                res.status(403).send({
+                    error: "This username Doesn't exist"
                 })
-            }
+                return
+            }  
             //Validate password 
             const isPasswordValid = await bcrypt.compare(password, user.password)
             if (!isPasswordValid) {
-                return res.status(403).send({
-                    error: 'The login info was incorrect'
+                res.status(403).send({
+                    error: 'Incorrect Password'
                 })
+                return
             }
             const userJson = user.toJSON()
             //create tokens
@@ -83,6 +86,7 @@ module.exports = {
             //respond with id and tokens
             res.json({ accessToken: accessToken, refreshToken: refreshToken, user: userJson})
         } catch (err){
+            console.log(err)
             res.status(500).send({
                 error: "login failed"
             })

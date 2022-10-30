@@ -5,9 +5,13 @@ module.exports = async () => {
         return
     }
     const dict = require('../DB/initialDict.json')
-        
+    let check = []
     dict.forEach(async function (item) {
-        var dictionary = new Dictionary(item)
-        await dictionary.save() 
+        if (check.indexOf(item.term) == -1) {
+            check.push(item.term)
+            var dictionary = new Dictionary(item)
+            await dictionary.save()
+        }
     })
+
 }

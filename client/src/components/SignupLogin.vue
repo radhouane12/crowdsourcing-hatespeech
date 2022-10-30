@@ -287,7 +287,7 @@ export default {
                 }
             }
             catch (error) {
-                console.log(error)
+                if (error.response.status == 403) this.errorlogin = error.response.data.error
             }
         },
         async register() {
@@ -307,6 +307,7 @@ export default {
                 try {
                     if (response.response.status == 400) {                       // Workaround: when bad request we receive a response.response 
                         this.error = response.response.data.error                // and when it doesn't fail then reading response.response returns an error and sends to catch {}
+                        console.log(this.error)
                     }
                 } catch (err) {
                     this.$store.dispatch('setRefreshToken', response.data.refreshToken)
@@ -328,7 +329,7 @@ export default {
                 }
             }
             catch (error) {
-                console.log(error)
+                if (error.response.status == 400) this.error = error.response.data.error
             }
         }
     },

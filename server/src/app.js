@@ -1,16 +1,15 @@
 const express = require('express')
-const mongoose = require('./DB/mongoose');
+const mongoose = require('./DB/mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 
 
-dotenv.config()
+dotenv.config({ path: `.env.${process.env.NODE_ENV}`})
 
 var db = mongoose(process.env.DB_CONNECT);
 const app = express()
-
 
 
 app.use(morgan("combined"))
@@ -35,8 +34,11 @@ flagRoutes(app)
 var StatisticRoutes = require('./app/routes/statistic.routes')
 StatisticRoutes(app)
 
+app.get('/test', async (req, res) => {
+    res.json({message: 'pass!'})
+})
 
+if (process.env.NODE_ENV != 'test') require('./DB/dictSeeder')();
+//require('./cron/DailyDataFetcher')();
 
-require('./DB/dictSeeder')();
-require('./cron/DailyDataFetcher')();
-app.listen(process.env.PORT)
+module.exports = app
