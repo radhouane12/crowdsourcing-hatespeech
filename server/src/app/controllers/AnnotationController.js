@@ -62,13 +62,14 @@ module.exports = {
         }
     },
     async editTweet(req, res) {
-        const action = req.params.action     
+        const action = req.params.action    
         switch (action) {
             case 'skip':
                 try {
-                    await Tweet.findOneAndUpdate({ _id: req.params.id }, { $push: { annotators: req.user.user.user._id } })
+                    await Tweet.findOneAndUpdate({ _id: req.params.id }, { $push: { annotators: req.user.user._id } })
                     res.send("tweet updated")
                 } catch (err) {
+                    console.log(err)
                     res.status(500).send({
                         error: "Couldn't update Annotators"
                     })
@@ -76,10 +77,11 @@ module.exports = {
                 break;
             case 'addCategory':
                 try {
-                    if (!req.user.user.user.isExpert) res.status(403).send({ error: "User is not allowed to do this action" })
+                    if (!req.user.user.isExpert) res.status(403).send({ error: "User is not allowed to do this action" })
                     let updatedVersion = await Tweet.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { category: req.body.data } }, { new: true })
                     res.send(updatedVersion)
                 } catch (err) {
+                    console.log(err)
                     res.status(500).send({
                         error: "Couldn't add category"
                     })
@@ -90,6 +92,7 @@ module.exports = {
                     await Tweet.findOneAndUpdate({ _id: req.params.id }, { $set: { flag: req.body.data } })
                     res.send("tweet flagged")
                 } catch (err) {
+                    console.log(err)
                     res.status(500).send({
                         error: "Couldn't flag tweet"
                     })
@@ -98,11 +101,11 @@ module.exports = {
             case 'label':
                 try {
                     let updatedtweet = await Tweet.findOneAndUpdate({ _id: req.params.id },
-                        { $push: { annotators: req.user.user.user._id, labels: { $each: req.body.data } },
+                        { $push: { annotators: req.user.user._id, labels: { $each: req.body.data } },
                         $inc: { numberOfAnnotations: 1 } },
                         {new: true}
                     )
-                    if (req.user.user.user.isExpert) {
+                    if (req.user.user.isExpert) {
                         updatedtweet = await Tweet.findOneAndUpdate({ _id: req.params.id }, 
                             { $push: { labels: { $each: req.body.data } }, 
                             $inc: { numberOfAnnotations: 1 } }, 
@@ -130,6 +133,7 @@ module.exports = {
                     }
                     res.send("tweet labeled")
                 } catch (err) {
+                    console.log(err)
                     res.status(500).send({
                         error: "Couldn't add Labels"
                     })
