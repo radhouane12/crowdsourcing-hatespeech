@@ -40,8 +40,8 @@ module.exports = {
                         for (let i = 0; i < 7; i++) {
                             let monthlyTweets = []
                             for (let j in categories) {
-                                let begindate = new Date(date.getFullYear(), date.getMonth() - i, 1)
-                                let enddate = new Date(date.getFullYear(), date.getMonth() + 1 - i, 0)
+                                let begindate = new Date(date.getFullYear(), date.getMonth() - i, 2)
+                                let enddate = new Date(date.getFullYear(), date.getMonth() + 1 - i, 1)
                                 monthlyTweets.push(...(await annotatedTweet.find({
                                     category: categories[j],
                                     created_at: { $gt: begindate, $lte: enddate }
