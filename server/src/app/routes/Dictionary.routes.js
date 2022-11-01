@@ -2,10 +2,10 @@ const DictionaryController = require('../controllers/DictionaryController')
 const verifyToken = require('../utils/VerifyToken')
 
 module.exports = (app) => {
-    app.get("/getDicts",verifyToken.authenticate, DictionaryController.getDicts)  
-    app.get("/getSuggs",verifyToken.authenticate, DictionaryController.getSuggs) 
-    app.post("/addTerm",verifyToken.authenticate, DictionaryController.addTerm) 
-    app.post("/addSuggestion",verifyToken.authenticate, DictionaryController.addSuggestion) 
-    app.post("/addSuggToDict",verifyToken.authenticate, DictionaryController.addSuggToDict) 
-    app.delete("/deleteSugg",verifyToken.authenticate, DictionaryController.deleteSugg) 
+    app.get("/dicts",verifyToken.authenticate, DictionaryController.getDicts)  
+    app.get("/suggs",verifyToken.authenticate, DictionaryController.getSuggs) 
+    app.post("/dicts",verifyToken.authenticate, DictionaryController.addTerm)
+    app.post("/suggs",verifyToken.authenticate, DictionaryController.addSuggestion) 
+    app.post("/suggs/add",verifyToken.authenticate, DictionaryController.addSuggToDict) 
+    app.delete("/suggs/delete",verifyToken.authenticate, DictionaryController.deleteSugg) 
 }

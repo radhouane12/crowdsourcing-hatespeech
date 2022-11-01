@@ -4,24 +4,17 @@ import store from '../store/store'
 
 export default {
     getFlagged() {
-        return Api.createAxiosRequest().get('getFlagged',{
+        return Api.createAxiosRequest().get('flags/index',{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
             }
         })
     },
-    keepTweet(tweetId) {
-        return Api.createAxiosRequest().post('keepTweet',tweetId,{
+    removeFlag(id,action) {
+        return Api.createAxiosRequest().post(`flags/${id}/${action}`,null,{
             headers: {
               'Authorization': "Bearer " + store.state.auth.accessToken,
             }
         })
-    },
-    deleteTweet(tweetId){
-        return Api.createAxiosRequest().delete('deleteTweet',{
-            headers: {
-              'Authorization': "Bearer " + store.state.auth.accessToken,
-            },data: tweetId})
-    },
-    
+    },  
 }

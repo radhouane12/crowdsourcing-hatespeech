@@ -14,20 +14,20 @@ module.exports = {
                         i--
                     }
                     tweets = tweets.sort(() => 0.5 - Math.random())
-                    tweets = tweets.slice(0,query.filterLength)
+                    tweets = tweets.slice(0, query.filterLength)
                     res.send(tweets)
                 } catch (err) {
                     res.status(500).send({
                         error: "Couldn't fetch tweets"
                     })
                 }
-              break;
+                break;
             case 'single':
                 try {
                     const categories = query.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
                     var tweets = []
                     let i = 4
-                    while (tweets.length < 1) { 
+                    while (tweets.length < 1) {
                         tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, _id: { $nin: query.alreadyViewed }, created_at: { "$gte": query.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
                         i--
                     }
@@ -38,7 +38,7 @@ module.exports = {
                         error: "Couldn't fetch tweet"
                     })
                 }
-              break;
+                break;
             case 'filtered':
                 try {
                     const categories = query.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
@@ -49,82 +49,94 @@ module.exports = {
                         i--
                     }
                     tweets = tweets.sort(() => 0.5 - Math.random())
-                    tweets = tweets.slice(0,query.filterLength)
+                    tweets = tweets.slice(0, query.filterLength)
                     res.send(tweets)
                 } catch (err) {
                     res.status(500).send({
                         error: "Couldn't fetch filtered tweets"
                     })
                 }
-              break;
+                break;
             default:
                 res.status(404).send("not found")
         }
     },
-    async skipTweet(req, res) {
-        try {
-            await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $push: { annotators: req.body.user } })
-            res.send("tweet updated")
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't update Annotators"
-            })
-        }
-    },
-    async flagTweet(req, res) {
-        try {
-            await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $set: { flag: req.body.flag } })
-            res.send("tweet flagged")
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't flag tweet"
-            })
-        }
-    },
-    async addCategory(req, res) {
-        try {
-            let updatedVersion = await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $addToSet: { category: req.body.newCategory } }, { new: true })
-            res.send(updatedVersion)
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't add category"
-            })
-        }
-    },
-    async labelTweet(req, res) {
-        try {
-            let updatedtweet = await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $push: { annotators: req.body.user, labels: { $each: req.body.labels } }, $inc: { numberOfAnnotations: 1 } }, {
-                new: true
-            })
-            if (req.headers.isexpert == "true") {
-                updatedtweet = await Tweet.findOneAndUpdate({ _id: req.body.tweetId }, { $push: { labels: { $each: req.body.labels } }, $inc: { numberOfAnnotations: 1 } }, {
-                    new: true
-                })
-            }
-            if (updatedtweet.numberOfAnnotations >= 5) {
-                let trackObj = {}
-                updatedtweet.labels.forEach(cur => {
-                    if (!trackObj[cur])
-                        trackObj[cur]= 1
-                    else
-                        trackObj[cur]++;
-                });
-                let maxOccurence = Math.max(...(Object.values(trackObj)))
-                const finalLabels = Object.keys(trackObj).filter(key => trackObj[key] === maxOccurence);
-                let newAnnotatedTweet = new AnnotatedTweet ({
-                    tweet:updatedtweet.tweet,
-                    created_at:updatedtweet.created_at,
-                    category:updatedtweet.category,
-                    finalLabels: finalLabels,
-                    annotators:updatedtweet.annotators,
-                })
-                await newAnnotatedTweet.save()
-            }
-            res.send("tweet labeled")
-        } catch (err) {
-            res.status(500).send({
-                error: "Couldn't add Labels"
-            })
+    async editTweet(req, res) {
+        const action = req.params.action     
+        switch (action) {
+            case 'skip':
+                try {
+                    await Tweet.findOneAndUpdate({ _id: req.params.id }, { $push: { annotators: req.user.user.user._id } })
+                    res.send("tweet updated")
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't update Annotators"
+                    })
+                }
+                break;
+            case 'addCategory':
+                try {
+                    if (!req.user.user.user.isExpert) res.status(403).send({ error: "User is not allowed to do this action" })
+                    let updatedVersion = await Tweet.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { category: req.body.data } }, { new: true })
+                    res.send(updatedVersion)
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't add category"
+                    })
+                }
+                break;
+            case 'flag':
+                try {
+                    await Tweet.findOneAndUpdate({ _id: req.params.id }, { $set: { flag: req.body.data } })
+                    res.send("tweet flagged")
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't flag tweet"
+                    })
+                }
+                break;
+            case 'label':
+                try {
+                    let updatedtweet = await Tweet.findOneAndUpdate({ _id: req.params.id },
+                        { $push: { annotators: req.user.user.user._id, labels: { $each: req.body.data } },
+                        $inc: { numberOfAnnotations: 1 } },
+                        {new: true}
+                    )
+                    if (req.user.user.user.isExpert) {
+                        updatedtweet = await Tweet.findOneAndUpdate({ _id: req.params.id }, 
+                            { $push: { labels: { $each: req.body.data } }, 
+                            $inc: { numberOfAnnotations: 1 } }, 
+                            {new: true}
+                        )
+                    }
+                    if (updatedtweet.numberOfAnnotations >= 5) {
+                        let trackObj = {}
+                        updatedtweet.labels.forEach(cur => {
+                            if (!trackObj[cur])
+                                trackObj[cur] = 1
+                            else
+                                trackObj[cur]++;
+                        });
+                        let maxOccurence = Math.max(...(Object.values(trackObj)))
+                        const finalLabels = Object.keys(trackObj).filter(key => trackObj[key] === maxOccurence);
+                        let newAnnotatedTweet = new AnnotatedTweet({
+                            tweet: updatedtweet.tweet,
+                            created_at: updatedtweet.created_at,
+                            category: updatedtweet.category,
+                            finalLabels: finalLabels,
+                            annotators: updatedtweet.annotators,
+                        })
+                        await newAnnotatedTweet.save()
+                    }
+                    res.send("tweet labeled")
+                } catch (err) {
+                    res.status(500).send({
+                        error: "Couldn't add Labels"
+                    })
+                }
+                break;
+            default:
+                res.status(404).send("action not recognised")
         }
     },
 }

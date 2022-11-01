@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container style="width: 80%">
         <v-card class="mx-auto" color="grey darken-1" elevation="1"  width="1200" >
             <v-row>
                 <v-col>

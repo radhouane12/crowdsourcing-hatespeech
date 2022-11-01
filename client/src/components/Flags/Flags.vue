@@ -79,12 +79,12 @@ export default {
     },
     methods: {
         async deleteTweet(id) {
-            await FlagService.deleteTweet({ "id": id })
+            await FlagService.removeFlag(id,"delete")
             const pos = this.flaggedTweets.map(tweet => tweet._id).indexOf(id)
             this.flaggedTweets.splice(pos, 1)
         },
         async keepTweet(id) {
-            await FlagService.keepTweet({ "id": id })
+            await FlagService.removeFlag(id,"keep")
             const pos = this.flaggedTweets.map(tweet => tweet._id).indexOf(id)
             this.flaggedTweets.splice(pos, 1)
         }

@@ -162,24 +162,25 @@ export default {
         async skip(id) {
             const pos = this.tweets.map(tweet => tweet._id).indexOf(id)
             this.tweets.splice(pos, 1)
-            await AnnotationService.skipTweet({ "tweetId": id, "user": this.$store.state.auth.user._id })
+            await AnnotationService.editTweet("skip",id,null)
             await this.getReplacement()
         },
         async flag(data) {
             const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
             this.tweets.splice(pos, 1)
-            await AnnotationService.flagTweet({ "tweetId": data.tweetId, "user": this.$store.state.auth.user._id, "flag": data.flag })
+            await AnnotationService.editTweet("flag",data.tweetId,{data: data.flag})
             await this.getReplacement()
         },
         async addCategory(data) {
-            const updatedVersion = (await AnnotationService.addCategory({ "tweetId": data.tweetId, "newCategory": data.newCategory })).data
+            console.log(data.newCategory)
+            const updatedVersion = (await AnnotationService.editTweet("addCategory",data.tweetId,{data:data.newCategory})).data
             const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
             this.tweets.splice(pos, 1, updatedVersion)
         },
         async submitLabels(data) {
             const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
             this.tweets.splice(pos, 1)
-            await AnnotationService.labelTweet({ "tweetId": data.tweetId, "user": this.$store.state.auth.user._id, "labels": data.labels })
+            await AnnotationService.editTweet("label",data.tweetId,{data:data.labels})
             await this.getReplacement()
         },
     }

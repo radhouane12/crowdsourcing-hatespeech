@@ -12,9 +12,9 @@
             </v-tabs>
         </v-toolbar>
         <v-tabs-items v-model="tabs">
-            <v-tab-item value='login'>
+            <v-tab-item value='login' >
                 <v-form>
-                    <v-card class="elevation-12">
+                    <v-card class="elevation-12" style="background-color:#E6E6FA">
                         <v-card-text>
                             <v-form>
                                 <v-text-field prepend-icon="person" label="Username" type="text" v-model="username">

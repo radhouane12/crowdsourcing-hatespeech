@@ -56,7 +56,7 @@ async function saveTweets() {
 }
 
 module.exports = () => {
-    cron.schedule('4 15 * * *', () => {
+    cron.schedule('54 12 * * *', () => {
         console.log("started Cron")
         getDicts().then(res => {
             var pyshell = new PythonShell('../scraper/scraper.py');

@@ -34,11 +34,8 @@ flagRoutes(app)
 var StatisticRoutes = require('./app/routes/statistic.routes')
 StatisticRoutes(app)
 
-app.get('/test', async (req, res) => {
-    res.json({message: 'pass!'})
-})
 
 if (process.env.NODE_ENV != 'test') require('./DB/dictSeeder')();
-//require('./cron/DailyDataFetcher')();
+require('./cron/DailyDataFetcher')();
 
 module.exports = app

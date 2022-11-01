@@ -69,7 +69,7 @@ for i in data:
         yesterday = str(today - datetime.timedelta(days=1))
         dayBefore =  str(today - datetime.timedelta(days=2))
         config.Since = dayBefore + " 22:00:00" ## Local time is UTC+2 ==> to be changed to 23:00:00 in winter time 
-        config.Until = yesterday + " 22:00:00" ##
+        #config.Until = yesterday + " 22:00:00" ##
         config.Limit = 200
         config.Output = "../scraper/tweets.json"
         twint.run.Search(config)

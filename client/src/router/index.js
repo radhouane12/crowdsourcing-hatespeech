@@ -54,8 +54,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if ( to.name!== 'landing' && !store.state.auth.isUserLoggedIn) {
-    next({name: 'landing', replace: true})
+  if ( to.name == ('annotation' || 'dictionaries' || 'flags' || 'test' || 'statistics' ) && !store.state.auth.isUserLoggedIn) {
+    next({name: 'landing'})
   }
   else next()
 })
