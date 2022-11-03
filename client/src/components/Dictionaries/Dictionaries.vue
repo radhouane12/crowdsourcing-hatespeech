@@ -4,7 +4,8 @@
             <v-spacer></v-spacer>
             <v-col>
                 <v-card v-if="fetchDicts" class="card" width="500" outlined elevation="1">
-                    <div class="ma-3 inputtext">Terms and experessions that already exist in our dictionaries and are being targeted in the daily tweet search
+                    <div class="ma-3 inputtext">Terms and experessions that already exist in our dictionaries and are
+                        being targeted in the daily tweet search
                     </div>
                     <v-card-title>
                         <v-text-field outlined v-model="search" append-icon="search" label="Search" single-line
@@ -44,15 +45,23 @@
                         </v-card-actions>
                     </v-card>
                 </v-form>
+                <v-row v-if="$store.state.auth.isExpert">
+                    <v-spacer></v-spacer>
+                    <v-btn class="mt-8" color="white" @click="reviewSuggestions">
+                        <span class="btnText" style="color:#673AB7; font-size: 13px" v-if="!showSuggestions">review suggestions</span>
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                </v-row>
             </v-col>
             <v-spacer></v-spacer>
         </v-row>
         <v-row v-if="!showSuggestions && this.$vuetify.breakpoint.mdAndDown" class="mb-5">
             <v-spacer></v-spacer>
             <v-card v-if="fetchDicts" class="card" width="500" outlined elevation="1">
-                <div class="ma-3 inputtext">Terms and experessions that already exist in our dictionaries and are being targeted in the daily tweet search</div>
+                <div class="ma-3 inputtext">Terms and experessions that already exist in our dictionaries and are being
+                    targeted in the daily tweet search</div>
                 <v-card-title>
-                    
+
                     <v-text-field outlined v-model="search" append-icon="search" label="Search" single-line
                         hide-details>
                     </v-text-field>
@@ -92,6 +101,13 @@
             </v-form>
             <v-spacer></v-spacer>
         </v-row>
+        <v-row v-if="$store.state.auth.isExpert && this.$vuetify.breakpoint.mdAndDown && !showSuggestions">
+            <v-spacer></v-spacer>
+            <v-btn class="mt-1" color="white" @click="reviewSuggestions">
+                <span class="btnText" style="color:#673AB7; font-size: 13px">review suggestions</span>
+            </v-btn>
+            <v-spacer></v-spacer>
+        </v-row>
         <v-row v-if="showSuggestions">
             <v-spacer></v-spacer>
             <v-card v-if="fetchSuggs" class="card" width="800" outlined elevation="1">
@@ -108,11 +124,10 @@
             </v-card>
             <v-spacer></v-spacer>
         </v-row>
-        <v-row v-if="$store.state.auth.isExpert">
+        <v-row v-if="$store.state.auth.isExpert && showSuggestions">
             <v-spacer></v-spacer>
-            <v-btn class="mt-3" color="deep-purple" @click="reviewSuggestions">
-                <span style="color:#FFFFFF; font-size: 13px" v-if="!showSuggestions">review suggestions</span>
-                <span style="color:#FFFFFF; font-size: 13px" v-if="showSuggestions">Show Dictionaries</span>
+            <v-btn class="mt-6" color="white" @click="reviewSuggestions">
+                <span class="btnText" style="color:#673AB7; font-size: 13px" v-if="showSuggestions">Show Dictionaries</span>
             </v-btn>
             <v-spacer></v-spacer>
         </v-row>
@@ -211,6 +226,9 @@ export default {
 
 .inputtext {
     font-size: 16px;
+    font-weight: bold;
+}
+.btnText {
     font-weight: bold;
 }
 </style>

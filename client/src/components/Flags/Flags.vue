@@ -16,10 +16,12 @@
                 <v-dialog v-model="help" width="70%">
                     <v-card>
                         <v-card-title class="text-h6">
-                            how to
+                            Flagged Tweets
                         </v-card-title>
                         <v-card-text>
-                            bla bla
+                            This page is only available for expert users. 
+                            <br>
+                            This page views tweets that have been flagged by users for being either incomprehensible or not in english. These tweets are not shown for annotation. You can decide to either delete the tweet from our database or put it back to annotation if you think its flag is not relevant.
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>

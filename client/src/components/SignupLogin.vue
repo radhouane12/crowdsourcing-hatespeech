@@ -139,7 +139,7 @@
                                         Why we require this information
                                     </v-card-title>
                                     <v-card-text>
-                                        bla bla
+                                        This demographical information helps us with insights about our annotators, making our dataset flexible and making it possible to see any user bias in the dataset as well as the possible elimination of such biases by creating sub-datasets.
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -152,10 +152,10 @@
                             <v-dialog v-model="what" width="70%">
                                 <v-card>
                                     <v-card-title class="text-h6">
-                                       What is an expert user
+                                       Expert users
                                     </v-card-title>
                                     <v-card-text>
-                                        bla bla
+                                        Are considered a cornerstone of this platform. They have access to multiple features that could impact the effectiveness of the platform. They are responsible for assessing flags and suggestions raised by regular users and their annotations weigh twice as much as the regulars'.
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>

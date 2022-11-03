@@ -1,25 +1,23 @@
 <template>
-
-    <v-container>
+    <v-container >
+    <v-container id="stats" height="700" class ="mb-5 mt-n2">
         <v-row v-if="this.$vuetify.breakpoint.lgAndUp">
             <v-spacer></v-spacer>
             <v-col>
-                <user-chart :height="520" v-if="uloaded" class="chart" :uData="uData"></user-chart>
+                <BarChart :height="400" v-if="uloaded" class="chart" :uData="uData"></BarChart>
             </v-col>
             <v-col></v-col>
             <v-col>
                 <v-row class="my-1">
-                    <tweet-chart :height="400" v-if="twloaded" :twData="twData"></tweet-chart>
+                    <PieChart :height="270" v-if="twloaded"  :twData="twData"></PieChart>
                     <v-col v-if="noPieDataToShow"></v-col>
                     <div class="mt-n16" v-if="noPieDataToShow"> No data matches your conditions</div>
                     <v-col v-if="noPieDataToShow"></v-col>
-                    <!-- should be changed to tdata -->
                 </v-row>
                 <v-row>
                     <v-col cols="2"></v-col>
                     <v-col>
                         <v-chip-group v-model="pieCategories" column multiple v-if="twloaded">
-                            <!--  v-bind:color=" isActive(0) ? 'secondary' : 'primary'" -->
                             <v-chip v-bind:outlined="isActivePie(0) ?false : true" color="#e27c7c">
                                 <span v-bind:class="{chipspan: isActivePie(0) }">Race</span>
                             </v-chip>
@@ -50,15 +48,13 @@
             <v-spacer></v-spacer>
             <v-col>
                 <v-row class="my-1">
-                    <trend-chart :width="600" v-if="trloaded" class="chart" :labels="labels" :trData="trData">
-                    </trend-chart>
-                    <!-- should be changed to tdata -->
+                    <LineChart :width="600" :height="340" v-if="trloaded" class="chart" :labels="labels" :trData="trData">
+                    </LineChart>
                 </v-row>
                 <v-row>
                     <v-col cols="1"></v-col>
                     <v-col>
                         <v-chip-group v-model="trendCategories" column multiple>
-                            <!--  v-bind:color=" isActive(0) ? 'secondary' : 'primary'" -->
                             <v-chip v-bind:outlined="isActive(0) ?false : true" color="#e27c7c">
                                 <span v-bind:class="{chipspan: isActive(0) }">Gender</span>
                             </v-chip>
@@ -83,10 +79,10 @@
                 <v-row class="mt-n5">
                     <v-col cols="4"></v-col>
                     <v-col>
-                        <v-btn class="mr-1" color="#e4bcad" @click="changeLabels('Daily')">
+                        <v-btn small class="mr-1" color="#e4bcad" @click="changeLabels('Daily')">
                             <span style="color:white; font-size: 13px">Daily</span>
                         </v-btn>
-                        <v-btn class="mr-1" color="#e4bcad" @click="changeLabels('Monthly')">
+                        <v-btn small class="mr-1" color="#e4bcad" @click="changeLabels('Monthly')">
                             <span style="color:white; font-size: 13px">Monthly</span>
                         </v-btn>
                     </v-col>
@@ -97,14 +93,14 @@
         </v-row>
         <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mb-5">
             <v-spacer></v-spacer>
-            <user-chart v-if="uloaded" class="chart" :uData="uData"></user-chart>
+            <barChart v-if="uloaded" class="chart" :uData="uData"></barChart>
             <v-spacer></v-spacer>
         </v-row>
         <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mb-2">
             <v-spacer></v-spacer>
             <v-col>
                 <v-row>
-                    <tweet-chart v-if="twloaded" :twData="twData"></tweet-chart> <!-- should be changed to tdata -->
+                    <PieChart v-if="twloaded" :twData="twData"></PieChart> 
                     <v-col v-if="noPieDataToShow"></v-col>
                     <div class="mt-n16" v-if="noPieDataToShow"> No data matches your conditions</div>
                     <v-col v-if="noPieDataToShow"></v-col>
@@ -113,7 +109,7 @@
                     <v-col cols="2"></v-col>
                     <v-col>
                         <v-chip-group v-model="pieCategories" column multiple v-if="twloaded">
-                            <!--  v-bind:color=" isActive(0) ? 'secondary' : 'primary'" -->
+
                             <v-chip v-bind:outlined="isActivePie(0) ?false : true" color="#e27c7c">
                                 <span v-bind:class="{chipspan: isActivePie(0) }">Race</span>
                             </v-chip>
@@ -143,14 +139,13 @@
             <v-spacer></v-spacer>
             <v-col>
                 <v-row>
-                    <trend-chart :width="600" v-if="trloaded" class="chart" :labels="labels" :trData="trData">
-                    </trend-chart>
+                    <LineChart :width="600" v-if="trloaded" class="chart" :labels="labels" :trData="trData">
+                    </LineChart>
                 </v-row>
                 <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mb-5">
                     <v-col cols="1"></v-col>
                     <v-col>
                         <v-chip-group v-model="trendCategories" column multiple>
-                            <!--  v-bind:color=" isActive(0) ? 'secondary' : 'primary'" -->
                             <v-chip v-bind:outlined="isActive(0) ?false : true" color="#e27c7c">
                                 <span v-bind:class="{chipspan: isActive(0) }">Race</span>
                             </v-chip>
@@ -188,21 +183,23 @@
 
             </v-col>
             <v-spacer></v-spacer>
-        </v-row>
+        </v-row>      
     </v-container>
+    <div></div>
+</v-container>
 </template>
 
 <script>
-import userChart from './plots/userChart.vue'
-import tweetChart from './plots/tweetChart.vue'
-import trendChart from './plots/trendChart.vue'
+import BarChart from './plots/Bar.vue'
+import PieChart from './plots/Pie.vue'
+import LineChart from './plots/Line.vue'
 import StatisticService from '../../services/StatisticService'
 
 export default {
     components: {
-        userChart,
-        tweetChart,
-        trendChart,
+        BarChart,
+        PieChart,
+        LineChart,
     },
     data() {
         return {
@@ -374,7 +371,7 @@ export default {
 </script>
 
 <style scoped>
-.chart {
+#stats {
     background-color: rgb(255, 255, 255);
 }
 

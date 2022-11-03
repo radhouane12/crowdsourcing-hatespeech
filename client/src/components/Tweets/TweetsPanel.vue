@@ -16,10 +16,16 @@
                     <v-dialog v-model="help" width="70%">
                         <v-card>
                             <v-card-title class="text-h6">
-                                how to
+                                Annotations
                             </v-card-title>
                             <v-card-text>
-                                bla bla
+                                This page allows you to annotate tweets that we have collected from twitter following a strategy of targeting tweets that contain terms that have been evaluated to be associated with online hate speech.
+                                <br>
+                                You can choose  to either label a tweet using the labels we provide, with the possibility of adding another label that you might see fit. It is necessary though, to choose one of the provided labels if you wish to label the tweet. You also may skip the tweet, if you do not wish to annotate it.
+                                <br>
+                                If the tweet is not comprehensible to you or is just not in english, you can flag it through the menu next the the "Submit" button. 
+                                <br>
+                                Expert users also can decide to assign the tweets to other categories. The provided categories are chosen according to the definition of hate speech.
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -172,7 +178,6 @@ export default {
             await this.getReplacement()
         },
         async addCategory(data) {
-            console.log(data.newCategory)
             const updatedVersion = (await AnnotationService.editTweet("addCategory",data.tweetId,{data:data.newCategory})).data
             const pos = this.tweets.map(tweet => tweet._id).indexOf(data.tweetId)
             this.tweets.splice(pos, 1, updatedVersion)

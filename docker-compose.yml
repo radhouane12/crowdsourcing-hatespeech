@@ -1,0 +1,41 @@
+version: "3"
+services:
+  vue-app:
+    image: vue-app
+    build: ./client/
+    stdin_open: true
+    ports:
+      - "8080:8080"
+    networks: 
+      - mevn-app
+    volumes:
+      - ./client/:/usr/src/app
+      - /usr/src/app/node_modules
+  api-server:
+    image: api-server
+    build: ./server/
+    ports:
+      - "8081:8081"
+    networks:
+      - mevn-app
+    depends_on:
+      - mongo
+    volumes:
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
+  mongo:
+    image: mongo:latest
+    ports: 
+      - "27017:27017"
+    networks:
+      - mevn-app
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  mevn-app:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

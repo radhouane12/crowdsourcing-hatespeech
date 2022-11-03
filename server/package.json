@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=dev nodemon src/start.js",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "start": "cross-env NODE_ENV=dev nodemon src/start.js"
   },
   "keywords": [],
   "author": "",

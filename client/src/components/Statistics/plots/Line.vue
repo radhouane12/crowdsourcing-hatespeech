@@ -1,8 +1,37 @@
+<template>
+    <LineChartGenerator :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId" :dataset-id-key="datasetIdKey"
+        :plugins="plugins" :css-classes="cssClasses" :styles="styles" :width="width" :height="height" />
+</template>
+
 <script>
-import { Line } from 'vue-chartjs'
+import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
+
+import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    LineElement,
+    LinearScale,
+    CategoryScale,
+    PointElement
+} from 'chart.js'
+
+ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    LineElement,
+    LinearScale,
+    CategoryScale,
+    PointElement
+)
 
 export default {
-    extends: Line,
+    name: 'LineChart',
+    components: {
+        LineChartGenerator
+    },
     props: {
         trData: {
             type: Object,
@@ -12,6 +41,34 @@ export default {
         {
             type: Array,
             required: true
+        },
+        chartId: {
+            type: String,
+            default: 'bar-chart'
+        },
+        datasetIdKey: {
+            type: String,
+            default: 'label'
+        },
+        width: {
+            type: Number,
+            default: 400
+        },
+        height: {
+            type: Number,
+            default: 400
+        },
+        cssClasses: {
+            default: '',
+            type: String
+        },
+        styles: {
+            type: Object,
+            default: () => { }
+        },
+        plugins: {
+            type: Array,
+            default: () => []
         }
     },
     data() {
@@ -64,26 +121,28 @@ export default {
 
                 },]
             },
-            options: {
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                title: {
-                    display: true,
-                    text: ' Recent Trends',
-                    fontSize: 16,
-                    fontColor: "#000000"
+            chartOptions: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Recent Trends',
+                        font: {
+                            size: 18,
+                        },
+                        color: "black"
+                    },
+                    legend: {
+                        display: true
+                    },
                 },
                 stacked: false,
                 scales: {
-                    yAxes: [{
+                    y: {
                         display: true,
                         position: 'left',
                         ticks: {
                             beginAtZero: true,
                             userCallback: function (label, index, labels) {
-                                // when the floored value is the same as the value we have a whole number
                                 if (Math.floor(label) === label) {
                                     return label;
                                 }
@@ -93,18 +152,12 @@ export default {
                         labels: {
                             show: true
                         }
-                    }]
-                },
-                legend: {
-                    display: true
+                    }
                 },
                 responsive: true,
                 maintainAspectRatio: false
             }
         }
     },
-    mounted() {
-        this.renderChart(this.chartData, this.options)
-    }
 }
 </script>

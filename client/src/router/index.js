@@ -57,6 +57,9 @@ router.beforeEach((to, from, next) => {
   if ( to.name == ('annotation' || 'dictionaries' || 'flags' || 'test' || 'statistics' ) && !store.state.auth.isUserLoggedIn) {
     next({name: 'landing'})
   }
+  else if (store.state.auth.testState && to.name != 'testPage'){
+    next({name: 'testPage'})
+  }
   else next()
 })
 

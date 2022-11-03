@@ -7,7 +7,7 @@
           <router-view />
         </v-container>
       </v-content>
-      <v-footer  fixed>
+      <v-footer  fixed color="#673AB7" class="mt-5">
         <v-spacer></v-spacer>
           <span class="text">
             {{ new Date().getFullYear() }}   —   <strong>Combat Hate</strong>
@@ -31,10 +31,10 @@ export default {
 
 <style>
 #app {
-  background: url('./assets/W.png') no-repeat center center fixed;
+  background: linear-gradient(rgba(103, 58, 183, 0.1),rgba(103, 58, 183, 0.1)),url('./assets/background.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 .text {
-  color: #673AB7;
+  color: white;
 }
 </style>

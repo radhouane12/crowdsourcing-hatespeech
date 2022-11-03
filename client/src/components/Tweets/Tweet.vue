@@ -1,5 +1,5 @@
 <template>
-  <v-card class="card" @mouseover="hover = true" @mouseleave="hover = false" hover outlined>
+  <v-card class="card" @mouseover="hover = true" @mouseleave="hover = false" outlined>
     <v-card-text>
       <span class="text-h8 text--primary">
         {{passedTweet.tweet}}
@@ -88,7 +88,7 @@ export default {
       additionalLabel: '',
       isOpened: false,
       hover: false,
-      labels: null,
+      labels: [],
       categories: ['Gender','Sexuality','Ethnicity','Religion','Race','Disability']
     }
   },
@@ -121,7 +121,7 @@ export default {
       if (this.additionalLabel) convertedLabels.push(this.additionalLabel)
       this.$emit('submit', {'tweetId' :this.passedTweet._id, "labels": convertedLabels})
       this.additionalLabel = ''
-      this.labels = null
+      this.labels = []
     },
     flag(flag) {
       this.isOpened=false

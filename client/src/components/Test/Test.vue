@@ -1,8 +1,8 @@
 <template>
     <v-container class="my-10">
         <v-layout row>
-            <v-card class="mx-auto" hover outlined width="900">
-                <v-toolbar dense color="deep-purple" dark>
+            <v-card class="mx-auto" hover  width="900">
+                <v-toolbar dense color="deep-purple" >
                     <v-icon color="white" left>
                         mdi-twitter
                     </v-icon>
@@ -47,10 +47,10 @@
                     </v-btn>
                 </v-card-actions>
                 <v-card-text v-if="i==0">
-                    <div class="text-h8 text--primary">In The Following, you will be presented with 10 tweets to annotate. According to your annotations you will either be an expert user or a regular user.
-                        Expert users are/have bla bla bla 
+                    <div class="text-h8 text--primary">In The Following, you will be presented with 10 tweets to annotate. Your annotations will be compared to those of a professional in the field. According to that comparison you will either become an expert user or remain a regular user.
+                        Expert users have access to multiple features that could impact the effectiveness of the platform. They are responsible for assessing flags and suggestions raised by regular users and their annotations weigh twice as much as the regulars'.
                     </div>
-                    <div class="text-h8 text--primary">If you do not wish to be an expert user, click the "QUIT TEST" Button above.</div>       
+                    <div class="text-h8 text--primary">If you wish to quit the test after starting, click the "QUIT TEST" Button above.</div>       
                 </v-card-text>
                 <v-card-actions v-if="i==0">
                     <v-spacer></v-spacer>
