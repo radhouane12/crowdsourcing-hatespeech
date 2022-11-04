@@ -2,7 +2,7 @@
   <div>
     <v-app-bar color="deep-purple" dark fixed app>
       <div @click="navigateTo({name: 'landing'})">
-        <img class="mr-3 mt-2 d-md home" :src="require('../assets/Logo.png')" height="34" />
+        <img class="mr-3 mt-2 d-md home" :src="require('../assets/logo.png')" height="34" />
       </div>
       <v-spacer></v-spacer>
       <div v-if="windowIsBigEnough">
