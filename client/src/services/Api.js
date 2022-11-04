@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 
 function createAxiosRequest () {
     var axiosInstance = axios.create({
-        baseURL: "http://localhost:8081/"
+        baseURL: process.env.VUE_APP_BASE_API_URL
     })
     if (store.state.auth.accessToken) {
         axiosInstance.interceptors.request.use(async req => {
@@ -17,7 +17,7 @@ function createAxiosRequest () {
             await axios({
                 method:'post',
                 url:'/getNewToken',
-                baseURL: 'http://localhost:8081',
+                baseURL: process.env.VUE_APP_BASE_API_URL,
                 data: {
                     token: store.state.auth.refreshToken
                 }

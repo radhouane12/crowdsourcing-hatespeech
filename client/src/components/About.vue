@@ -7,7 +7,7 @@
                     <div class="ml-5 mt-n4" style="color:white">
                         Combat Hate was built to assist researchers and practioners in the field of online hate speech
                         detection.
-                        We Provide this platform to enable the crowdsourcing of data annotation. Crowdsourcing has proven to be one of the most effective ways to reach relevant and robust hate speech related datasets. Our goal is to have a relevant and robust dataset that is relevant to use in the field.
+                        We Provide this platform to enable the crowdsourcing of data annotation, offering a way to engage the topic by labeling tweets that we have collected. Crowdsourcing has proven to be one of the most effective ways to reach relevant and robust hate speech related datasets. Our goal is to have a relevant and robust dataset that is relevant to use in the field.
                         <br>
                         Our approach is to gather target twitter data that contains terms that we think might be mentioned in hateful content. The terms we target are available on the platform and it's possible to modify and make suggestions.
                         <br>
