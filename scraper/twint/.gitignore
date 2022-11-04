@@ -110,6 +110,5 @@ ENV/
 # output
 *.csv
 *.json
-*.txt
 
 test_twint.py
