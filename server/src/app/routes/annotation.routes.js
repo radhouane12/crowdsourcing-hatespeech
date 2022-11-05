@@ -4,6 +4,6 @@ const verifyToken = require('../utils/VerifyToken')
 
 
 module.exports = (app) => {
-    app.get("/tweet/index", verifyToken.authenticate, AnnotationController.index)    
-    app.post("/tweet/:id/:action", verifyToken.authenticate, AnnotationController.editTweet)
+    app.get("/API/tweet/index", verifyToken.authenticate, AnnotationController.index)    
+    app.post("/API/tweet/:id/:action", verifyToken.authenticate, AnnotationController.editTweet)
 }
