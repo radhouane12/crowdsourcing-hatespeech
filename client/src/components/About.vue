@@ -11,7 +11,7 @@
                         <br>
                         Our approach is to gather target twitter data that contains terms that we think might be mentioned in hateful content. The terms we target are available on the platform and it's possible to modify and make suggestions.
                         <br>
-                        If you wish to use our dataset or have any questions regarding the platform, contact us at: radhouane12@tu-berlin.de
+                        If you wish to use our dataset or have any questions regarding the platform, contact us at: rhimi@campus.tu-berlin.de
                     </div>
                 </v-col>
                 <v-col>
