@@ -63,10 +63,18 @@ module.exports = {
     },
     async editTweet(req, res) {
         const action = req.params.action    
+        let userID = req.user.user._id
+        let expert = req.user.user.isExpert
+        console.log(userID)
+        if (typeof req.user.user._id === 'undefined') {
+            userID = req.user.user.user._id
+            expert = req.user.user.user.isExpert
+        }
+        console.log(userID)
         switch (action) {
             case 'skip':
                 try {
-                    await Tweet.findOneAndUpdate({ _id: req.params.id }, { $push: { annotators: req.user.user._id } })
+                    await Tweet.findOneAndUpdate({ _id: req.params.id }, { $push: { annotators: userID } })
                     res.send("tweet updated")
                 } catch (err) {
                     console.log(err)
@@ -77,7 +85,7 @@ module.exports = {
                 break;
             case 'addCategory':
                 try {
-                    if (!req.user.user.isExpert) res.status(403).send({ error: "User is not allowed to do this action" })
+                    if (!expert) res.status(403).send({ error: "User is not allowed to do this action" })
                     let updatedVersion = await Tweet.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { category: req.body.data } }, { new: true })
                     res.send(updatedVersion)
                 } catch (err) {
@@ -101,18 +109,18 @@ module.exports = {
             case 'label':
                 try {
                     let updatedtweet = await Tweet.findOneAndUpdate({ _id: req.params.id },
-                        { $push: { annotators: req.user.user._id, labels: { $each: req.body.data } },
+                        { $push: { annotators: userID, labels: { $each: req.body.data } },
                         $inc: { numberOfAnnotations: 1 } },
                         {new: true}
                     )
-                    if (req.user.user.isExpert) {
+                    if (expert) {
                         updatedtweet = await Tweet.findOneAndUpdate({ _id: req.params.id }, 
                             { $push: { labels: { $each: req.body.data } }, 
                             $inc: { numberOfAnnotations: 1 } }, 
                             {new: true}
                         )
                     }
-                    if (updatedtweet.numberOfAnnotations >= 5) {
+                    if (updatedtweet.numberOfAnnotations >= 3) {
                         let trackObj = {}
                         updatedtweet.labels.forEach(cur => {
                             if (!trackObj[cur])

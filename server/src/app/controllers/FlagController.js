@@ -15,10 +15,16 @@ module.exports = {
     },
     async removeFlag (req,res) {
         const action = req.params.action     
+        let expert = req.user.user.isExpert
+        console.log(expert)
+        if (typeof expert === 'undefined') {
+            expert = req.user.user.user.isExpert
+        }
+        console.log(expert)
         switch (action) {
             case 'keep':
                 try {
-                    if (!req.user.user.isExpert) res.status(403).send({ error: "User is not allowed to do this action" })
+                    if (!expert) res.status(403).send({ error: "User is not allowed to do this action" })
                     const kept =  await Tweet.findByIdAndUpdate(req.params.id, { $unset : { flag : 1} })
                     res.send(kept)
                 } catch (err){
@@ -30,7 +36,7 @@ module.exports = {
                 break;
             case 'delete':
                 try {
-                    if (!req.user.user.isExpert) res.status(403).send({ error: "User is not allowed to do this action" })
+                    if (!expert) res.status(403).send({ error: "User is not allowed to do this action" })
                     const deleted = await Tweet.findByIdAndDelete(req.params.id)
                     res.send(deleted)
                 } catch (err){

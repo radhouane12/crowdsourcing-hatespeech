@@ -140,14 +140,9 @@ export default {
                     y: {
                         display: true,
                         position: 'left',
+                        min: 0,
                         ticks: {
-                            beginAtZero: true,
-                            userCallback: function (label, index, labels) {
-                                if (Math.floor(label) === label) {
-                                    return label;
-                                }
-
-                            },
+                            stepSize: 1                       
                         },
                         labels: {
                             show: true

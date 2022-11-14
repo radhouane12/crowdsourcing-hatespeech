@@ -1,15 +1,19 @@
 const User = require('mongoose').model('User')
 
 module.exports = {
-    async makeExpert (req,res) {
+    async makeExpert(req, res) {
         try {
-            await User.findOneAndUpdate({_id: req.user.user._id},  { $set : {isExpert : true}})
+            let userID = req.user.user._id
+            if (typeof req.user.user._id === 'undefined') {
+                userID = req.user.user.user._id
+            }
+            await User.findOneAndUpdate({ _id: req.user.user._id }, { $set: { isExpert: true } })
             res.send("User is now an expert")
-        } catch (err){
+        } catch (err) {
             res.status(500).send({
                 error: "Couldnt make user expert"
             })
         }
-          
+
     }
 }

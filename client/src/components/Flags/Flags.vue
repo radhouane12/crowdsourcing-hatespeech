@@ -34,7 +34,6 @@
             </v-toolbar>
             <div v-if="flaggedTweetsAvailable">
                 <v-card v-for="tweet in flaggedTweets" :key="tweet._id">
-                    <!-- change key to tweet.id -->
                     <v-card-text>
                         <span class="text-h8 text--primary">
                             {{ tweet.tweet }}
@@ -68,7 +67,6 @@ export default {
     data() {
         return {
             flaggedTweets: [],
-            change: 0,
             help: false,
         }
     },
