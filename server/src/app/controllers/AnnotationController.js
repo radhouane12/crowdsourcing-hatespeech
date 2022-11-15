@@ -65,12 +65,10 @@ module.exports = {
         const action = req.params.action    
         let userID = req.user.user._id
         let expert = req.user.user.isExpert
-        console.log(userID)
         if (typeof req.user.user._id === 'undefined') {
             userID = req.user.user.user._id
             expert = req.user.user.user.isExpert
         }
-        console.log(userID)
         switch (action) {
             case 'skip':
                 try {
