@@ -22,7 +22,8 @@ function createAxiosRequest () {
                     token: store.state.auth.refreshToken
                 }
             }).then((res) => {             
-                store.state.auth.accessToken = res.data.accessToken  
+                store.state.auth.accessToken = res.data.accessToken
+                store.state.auth.refreshToken = res.data.refreshToken
                 newAccessToken = `Bearer ${res.data.accessToken}`
               }, (error) => {
                 console.log("couldnt't refresh Token: "+ error)

@@ -6,11 +6,11 @@ const bcrypt = require ('bcrypt')
 
 //create JWT Token
 function createAccessToken (user) {
-    const ONE_HOUR =60*60
+    const ONE_HOUR = 5           //60*60
     return jwt.sign ({ user, exp: Math.floor(Date.now() / 1000) + ONE_HOUR}, process.env.JWT_SECRET_ACCESS)
 }
 function createRefreshToken (user) {
-    const ONE_WEEK =60*60*24*7
+    const ONE_WEEK = 20//60*60*24*7
     return jwt.sign ({ user, exp: Math.floor(Date.now() / 1000) + ONE_WEEK}, process.env.JWT_SECRET_REFRESH)
 }
 
@@ -38,8 +38,7 @@ module.exports = {
             const refreshToken = createRefreshToken(savedUser)
             //save refreshtoken in DB
             const tokenRecord = new RefreshToken({
-                token: refreshToken,
-                createdAt: Date.now()
+                tokenFamily: [refreshToken],
             })
             await tokenRecord.save()
             //respond with id and tokens
@@ -57,8 +56,7 @@ module.exports = {
             //check if user exists
             const user = await User.findOne({
                 username: username
-            })
-            
+            }) 
             if (!user) {
                 res.status(403).send({
                     error: "This username Doesn't exist"
@@ -79,8 +77,7 @@ module.exports = {
             const refreshToken = createRefreshToken(userJson)
             //save refreshtoken in DB
             const tokenRecord = new RefreshToken({
-                token: refreshToken,
-                createdAt: Date.now()
+                tokenFamily: [refreshToken],
             })
             await tokenRecord.save()
             //respond with id and tokens
@@ -96,7 +93,7 @@ module.exports = {
         try {
             const token= req.body.token
             await RefreshToken.deleteOne({
-                token: token
+                tokenFamily: token
             })
             res.sendStatus(204)
         } catch (err){
@@ -109,24 +106,37 @@ module.exports = {
         try {
             const receivedToken= req.body.token        
             if (receivedToken == null) return res.sendStatus(401)
-            const refreshToken = await RefreshToken.findOne({
-                token: receivedToken
+            const refreshTokenFamily = await RefreshToken.findOne({
+                tokenFamily: receivedToken
             })
-            if (!refreshToken) {
-                console.log("forbidden because not found")
+            if (!refreshTokenFamily) {
+                console.log("forbidden: token not found")
                 return res.sendStatus(403)
-            }
+            }    
             try {
+                if (refreshTokenFamily.tokenFamily.indexOf(receivedToken) != refreshTokenFamily.tokenFamily.length -1) {
+                    console.log("forbidden: token already used, potentially an attacker")
+                    await RefreshToken.findOneAndDelete({
+                        tokenFamily: receivedToken
+                    })
+                    return res.sendStatus(403)
+                }
                 jwt.verify(receivedToken, process.env.JWT_SECRET_REFRESH, async (err, user) => {
                     if (err) {
-                        console.log("forbidden because not verified")
+                        console.log("forbidden: token couldn't get verified")
                         await RefreshToken.findOneAndDelete({
-                            token: receivedToken
+                            tokenFamily: receivedToken
                         })
                         return res.sendStatus(403)
                     }
                     const accessToken = createAccessToken (user)
-                    res.json({ accessToken: accessToken})
+                    const refreshToken = createRefreshToken(user)
+                    await RefreshToken.findOneAndUpdate(
+                        {tokenFamily: receivedToken},
+                        {$push: {tokenFamily: refreshToken}}
+                    )
+                    console.log (6) 
+                    res.json({ accessToken: accessToken, refreshToken: refreshToken})
                 })   
             } catch(error){
                 res.status(401).send('Invalid Refresh Token' + error)
