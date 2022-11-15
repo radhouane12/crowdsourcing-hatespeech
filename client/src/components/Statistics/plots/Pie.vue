@@ -63,11 +63,11 @@ export default {
                 datasets: [{
                     borderWidth: 1,
                     backgroundColor: [
-                        '#e27c7c',
-                        '#dedad2',
-                        '#e4bcad',
-                        '#df979e',
-                        '#d7658b',
+                        '#DF536B',
+                        '#F5C710',
+                        '#61D04F',
+                        '#CD0BBC',
+                        'gray',
                     ],
                     data: [this.twData["Hateful"], this.twData["Abusive"], this.twData["Neutral"], this.twData["Threat"], this.twData["Spam"]]
                 }]

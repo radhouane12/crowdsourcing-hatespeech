@@ -79,8 +79,8 @@ export default {
                     label: 'Hateful',
                     tension: 0.3,
                     fill: false,
-                    backgroundColor: '#e27c7c',
-                    borderColor: '#e27c7c',
+                    backgroundColor: '#DF536B',
+                    borderColor: '#DF536B',
                     data: [this.trData[7]["Hateful"], this.trData[6]["Hateful"], this.trData[5]["Hateful"], this.trData[4]["Hateful"], this.trData[3]["Hateful"], this.trData[2]["Hateful"], this.trData[1]["Hateful"]],
 
                 },
@@ -88,8 +88,8 @@ export default {
                     label: 'Abusive',
                     tension: 0.3,
                     fill: false,
-                    backgroundColor: '#d7658b',
-                    borderColor: '#d7658b',
+                    backgroundColor: '#F5C710',
+                    borderColor: '#F5C710',
                     data: [this.trData[7]["Abusive"], this.trData[6]["Abusive"], this.trData[5]["Abusive"], this.trData[4]["Abusive"], this.trData[3]["Abusive"], this.trData[2]["Abusive"], this.trData[1]["Abusive"]],
 
                 },
@@ -97,8 +97,8 @@ export default {
                     label: 'Neutral',
                     tension: 0.3,
                     fill: false,
-                    backgroundColor: '#e4bcad',
-                    borderColor: '#e4bcad',
+                    backgroundColor: '#61D04F',
+                    borderColor: '#61D04F',
                     data: [this.trData[7]["Neutral"], this.trData[6]["Neutral"], this.trData[5]["Neutral"], this.trData[4]["Neutral"], this.trData[3]["Neutral"], this.trData[2]["Neutral"], this.trData[1]["Neutral"]],
 
                 },
@@ -106,8 +106,8 @@ export default {
                     label: 'Threat',
                     tension: 0.3,
                     fill: false,
-                    backgroundColor: '#df979e',
-                    borderColor: '#df979e',
+                    backgroundColor: '#CD0BBC',
+                    borderColor: '#CD0BBC',
                     data: [this.trData[7]["Threat"], this.trData[6]["Threat"], this.trData[5]["Threat"], this.trData[4]["Threat"], this.trData[3]["Threat"], this.trData[2]["Threat"], this.trData[1]["Threat"]],
 
                 },
@@ -115,8 +115,8 @@ export default {
                     label: 'Spam',
                     tension: 0.3,
                     fill: false,
-                    backgroundColor: '#dedad2',
-                    borderColor: '#dedad2',
+                    backgroundColor: 'gray',
+                    borderColor: 'gray',
                     data: [this.trData[7]["Spam"], this.trData[6]["Spam"], this.trData[5]["Spam"], this.trData[4]["Spam"], this.trData[3]["Spam"], this.trData[2]["Spam"], this.trData[1]["Spam"]],
 
                 },]

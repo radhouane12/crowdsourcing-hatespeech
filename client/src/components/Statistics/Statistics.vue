@@ -18,23 +18,23 @@
                     <v-col cols="2"></v-col>
                     <v-col>
                         <v-chip-group v-model="pieCategories" column multiple v-if="twloaded">
-                            <v-chip v-bind:outlined="isActivePie(0) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(0) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(0) }">Race</span>
                             </v-chip>
 
-                            <v-chip v-bind:outlined="isActivePie(1) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(1) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(1) }">Sexuality</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(2) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(2) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(2) }">Ethnicity</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(3) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(3) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(3) }">Religion</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(4) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(4) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(4) }">Gender</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(5) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(5) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(5) }">Disability</span>
                             </v-chip>
                         </v-chip-group>
@@ -55,22 +55,22 @@
                     <v-col cols="1"></v-col>
                     <v-col>
                         <v-chip-group v-model="trendCategories" column multiple>
-                            <v-chip v-bind:outlined="isActive(0) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(0) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(0) }">Gender</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(1) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(1) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(1) }">Sexuality</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(2) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(2) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(2) }">Ethnicity</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(3) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(3) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(3) }">Religion</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(4) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(4) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(4) }">Race</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(5) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(5) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(5) }">Disability</span>
                             </v-chip>
                         </v-chip-group>
@@ -79,10 +79,10 @@
                 <v-row class="mt-n5">
                     <v-col cols="4"></v-col>
                     <v-col>
-                        <v-btn small class="mr-1" color="#e4bcad" @click="changeLabels('Daily')">
+                        <v-btn small class="mr-1" color="#AB47BC" @click="changeLabels('Daily')">
                             <span style="color:white; font-size: 13px">Daily</span>
                         </v-btn>
-                        <v-btn small class="mr-1" color="#e4bcad" @click="changeLabels('Monthly')">
+                        <v-btn small class="mr-1" color="#AB47BC" @click="changeLabels('Monthly')">
                             <span style="color:white; font-size: 13px">Monthly</span>
                         </v-btn>
                     </v-col>
@@ -110,22 +110,22 @@
                     <v-col>
                         <v-chip-group v-model="pieCategories" column multiple v-if="twloaded">
 
-                            <v-chip v-bind:outlined="isActivePie(0) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(0) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(0) }">Race</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(1) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(1) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(1) }">Sexuality</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(2) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(2) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(2) }">Ethnicity</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(3) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(3) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(3) }">Religion</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(4) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(4) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(4) }">Gender</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActivePie(5) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActivePie(5) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActivePie(5) }">Disability</span>
                             </v-chip>
                         </v-chip-group>
@@ -146,23 +146,23 @@
                     <v-col cols="1"></v-col>
                     <v-col>
                         <v-chip-group v-model="trendCategories" column multiple>
-                            <v-chip v-bind:outlined="isActive(0) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(0) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(0) }">Race</span>
                             </v-chip>
 
-                            <v-chip v-bind:outlined="isActive(1) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(1) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(1) }">Sexuality</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(2) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(2) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(2) }">Ethnicity</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(3) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(3) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(3) }">Religion</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(4) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(4) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(4) }">Gender</span>
                             </v-chip>
-                            <v-chip v-bind:outlined="isActive(5) ?false : true" color="#e27c7c">
+                            <v-chip v-bind:outlined="isActive(5) ?false : true" color="#CE93D8">
                                 <span v-bind:class="{chipspan: isActive(5) }">Disability</span>
                             </v-chip>
                         </v-chip-group>
@@ -171,10 +171,10 @@
                 <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mt-n9">
                     <v-col cols="4"></v-col>
                     <v-col>
-                        <v-btn class="mr-1" color="#e4bcad" @click="changeLabels('Daily')">
+                        <v-btn class="mr-1" color="#AB47BC" @click="changeLabels('Daily')">
                             <span style="color:white; font-size: 13px">Daily</span>
                         </v-btn>
-                        <v-btn class="mr-1" color="#e4bcad" @click="changeLabels('Monthly')">
+                        <v-btn class="mr-1" color="#AB47BC" @click="changeLabels('Monthly')">
                             <span style="color:white; font-size: 13px">Monthly</span>
                         </v-btn>
                     </v-col>

@@ -62,10 +62,9 @@ export default {
                 datasets: [{
                     borderWidth: 1,
                     backgroundColor: [
-                        '#dedad2',
-                        '#df979e',
+                        '#DF536B',
+                        '#61D04F',
                     ],
-                    pointBorderColor: '#2554FF',
                     data: [this.uData["regulars"], this.uData["experts"]]
                 }]
             },
