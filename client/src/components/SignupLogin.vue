@@ -46,7 +46,6 @@
                                     <v-text-field v-model="registerUsername" :error-messages="errors" label="Username"
                                         required></v-text-field>
                                 </validation-provider>
-                                <div v-if="error" class="mb-4" style="color:red;">{{ error }}</div>
                             </v-flex>
                             <v-flex></v-flex>
                             <v-flex xs12 md5>
@@ -93,7 +92,6 @@
                                         hint="Only numbers are allowed" label="Annual Income" required></v-text-field>
                                 </validation-provider>
                             </v-flex>
-
                             <v-flex xs12 md5>
                                     <v-select v-model="nationality" :items="nationalities"
                                         label="Nationality (optional)" required>
@@ -125,6 +123,9 @@
                             <v-flex xs12 md12>
                                 <div class="mb-4"><a href="#" @click.prevent="why = true">Why we require
                                         this information ?</a></div>
+                            </v-flex>
+                            <v-flex xs12 md12>
+                                <div v-if="error" class="mb-4" style="color:red;">{{ error }}</div>
                             </v-flex>
                             <v-flex xs12 md12>
                                 <v-btn color="deep-purple" @click="clear" outlined>
@@ -205,7 +206,7 @@ extend('numeric', {
 extend("birthyear", {
   validate: (value, args) => {
     return {
-      valid:  value <= new Date().getFullYear() && value > 1900,
+      valid:  value <= new Date().getFullYear() && value > new Date().getFullYear()-100,
     };
   },
   message: "You can't possibly be that old or born in the future"
@@ -343,8 +344,8 @@ export default {
                     isExpert: false
                 })
                 try {
-                    if (response.response.status == 400) {                       // Workaround: when bad request we receive a response.response 
-                        this.error = response.response.data.error                // and when it doesn't fail then reading response.response returns an error and sends to catch {}
+                    if (response.response.status == 422 || error.response.status == 400) {                       // Workaround: when bad request we receive a response.response 
+                        this.error = response.response.data.error                                                 // and when it doesn't fail then reading response.response returns an error and sends to catch {}
                         console.log(this.error)
                     }
                 } catch (err) {
@@ -367,7 +368,7 @@ export default {
                 }
             }
             catch (error) {
-                if (error.response.status == 400) this.error = error.response.data.error
+                if (error.response.status == 422 || error.response.status == 400) this.error = error.response.data.error
             }
         }
     },

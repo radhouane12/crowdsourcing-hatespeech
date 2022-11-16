@@ -45,7 +45,7 @@ module.exports = {
             res.json({ accessToken: accessToken, refreshToken: refreshToken, user: savedUser})
         } catch (err){
             res.status(400).send({
-                error: "this email account is already in use"
+                error: "couldn't create user account"
             })
         }
           
@@ -135,7 +135,6 @@ module.exports = {
                         {tokenFamily: receivedToken},
                         {$push: {tokenFamily: refreshToken}}
                     )
-                    console.log (6) 
                     res.json({ accessToken: accessToken, refreshToken: refreshToken})
                 })   
             } catch(error){
