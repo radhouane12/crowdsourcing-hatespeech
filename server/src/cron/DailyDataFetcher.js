@@ -68,6 +68,9 @@ module.exports = () => {
                 if (err) console.log(err)
                 saveTweets()
             });
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            console.log(err)
+            saveTweets()
+        })
     });
 }

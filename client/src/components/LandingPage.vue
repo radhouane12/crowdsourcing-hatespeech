@@ -4,14 +4,16 @@
             <v-spacer v-if="this.$vuetify.breakpoint.lgAndUp"></v-spacer>
             <v-flex xs12 lg5 xl4>
                 <v-sheet id="side-sheet" outlined rounded shaped>
-                    <img class="my-2 mx-8"  :src="require('../assets/logo-p.png')" height="34" />
-                    <div id="text" class="mx-6" style="color:black">
+                    <div style="text-align: center; position: relative;left: -12px;">
+                        <img class="my-2"  :src="require('../assets/logo-p.png')" height="34" />
+                    </div>
+                    <div id="text" style="color:black;text-align: center;">
                         Combat Hate was built to assist researchers and practioners in the field of online hate speech
                         detection by providing a platform to annotate data, providing up-to-date labeled dataset with
                         all information that may be relevant in the process.
                     </div>
                     <br>
-                    <div id="text" class="mx-6 mb-3 mt-n4" style="color:#673AB7;font-size: 18px;">
+                    <div id="text" class="mb-3 mt-n4" style="color:#673AB7;font-size: 18px;text-align: center;">
                         <b>Help us build a dataset that you could use! Register now 👉</b>
                     </div>
                 </v-sheet>
