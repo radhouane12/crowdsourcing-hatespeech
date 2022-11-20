@@ -8,7 +8,7 @@ const registrationSchema = Joi.object({
     gender: Joi.string().valid('Male', 'Female', 'Divers').required(),
     age: Joi.number().greater(0).less(100).required(),
     profession: Joi.string().required(),
-    annualIncome: Joi.number().required(),
+    annualIncome: Joi.number().allow(null).required(),
     education: Joi.string().valid(
         'Early childhood education',
         'Primary education',

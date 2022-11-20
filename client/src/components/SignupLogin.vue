@@ -87,9 +87,9 @@
                             </v-flex>
                             <v-flex></v-flex>
                             <v-flex xs12 md5>
-                                <validation-provider v-slot="{ errors }" name="Annual Income" rules="required|decimal">
+                                <validation-provider v-slot="{ errors }" name="Annual Income" rules="decimal">
                                     <v-text-field v-model="annualIncome" :error-messages="errors" prefix="€"
-                                        hint="Only numbers are allowed" label="Annual Income" required></v-text-field>
+                                        hint="Only numbers are allowed" label="Annual Income (Optional)" required></v-text-field>
                                 </validation-provider>
                             </v-flex>
                             <v-flex xs12 md5>
@@ -259,7 +259,7 @@ export default {
         ],
         birthyear: null,
         profession: '',
-        annualIncome: '',
+        annualIncome: null,
         selectedEducation: null,
         education: [
             'Early childhood education',
@@ -290,7 +290,7 @@ export default {
             this.selectedGender = null
             this.birthyear = null
             this.profession = ''
-            this.annualIncome = ''
+            this.annualIncome = null
             this.selectedEducation = null
             this.nationality = null
             this.residence = null
@@ -337,7 +337,7 @@ export default {
                     gender: this.selectedGender,
                     age: new Date().getFullYear()-this.birthyear,
                     profession: this.profession,
-                    annualIncome: parseInt(this.annualIncome, 10),
+                    annualIncome: this.annualIncome == null ? null : parseInt(this.annualIncome, 10),
                     education: this.selectedEducation,
                     nationality: this.nationality,
                     residence: this.residence,

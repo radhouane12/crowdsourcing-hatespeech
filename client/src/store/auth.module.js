@@ -3,6 +3,7 @@
 export const auth ={
     strict: true,
     state: {
+        tutorial: true,
         refreshToken: null,
         accessToken: null,
         user: null,

@@ -8,6 +8,10 @@
                         mdi-twitter
                     </v-icon>
                     <v-spacer></v-spacer>
+                    <v-btn class="elevation-0" color="deep-purple" small @click.prevent="$store.state.auth.tutorial = true">
+                        show label definitions
+                    </v-btn>
+                    <v-spacer></v-spacer>
                     <v-btn class="elevation-0" color="deep-purple" fab small @click.prevent="help = true">
                         <v-icon color="white" center >
                             mdi-help-circle-outline

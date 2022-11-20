@@ -9,13 +9,20 @@ module.exports = {
                 try {
                     var tweets = []
                     let i = 4
-                    while (tweets.length < query.filterLength) {
+                    while (tweets.length < query.filterLength && i >=0) {
                         tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
                         i--
                     }
-                    tweets = tweets.sort(() => 0.5 - Math.random())
-                    tweets = tweets.slice(0, query.filterLength)
-                    res.send(tweets)
+                    if (tweets.length >= query.filterLength) {
+                        tweets = tweets.sort(() => 0.5 - Math.random())
+                        tweets = tweets.slice(0, query.filterLength)
+                        res.send(tweets)
+                    }
+                    else if (tweets.length > 0){
+                        res.send(tweets)
+                    } else {
+                        res.status(204).send()
+                    }
                 } catch (err) {
                     res.status(500).send({
                         error: "Couldn't fetch tweets"
@@ -27,12 +34,17 @@ module.exports = {
                     const categories = query.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
                     var tweets = []
                     let i = 4
-                    while (tweets.length < 1) {
+                    while (tweets.length < 1 && i>=0) {
                         tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, _id: { $nin: query.alreadyViewed }, created_at: { "$gte": query.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
                         i--
                     }
-                    tweets = tweets.sort(() => 0.5 - Math.random())
-                    res.send(tweets[0])
+                    if (tweets.length > 0) {
+                        tweets = tweets.sort(() => 0.5 - Math.random())
+                        res.send(tweets[0])
+                    }
+                    else {
+                        res.status(204).send()
+                    }
                 } catch (err) {
                     res.status(500).send({
                         error: "Couldn't fetch tweet"
@@ -44,13 +56,19 @@ module.exports = {
                     const categories = query.categories.map(item => item == 0 ? 'Gender' : item == 1 ? 'Disability' : item == 2 ? 'Race' : item == 3 ? 'Religion' : item == 4 ? 'Ethnicity' : 'Sexuality')
                     var tweets = []
                     let i = 4
-                    while (tweets.length < query.filterLength) {
+                    while (tweets.length < query.filterLength && i >= 0) {
                         tweets.push(...(await Tweet.find({ annotators: { $ne: query.user }, created_at: { "$gte": query.date }, category: { $in: categories }, numberOfAnnotations: { $eq: i }, flag: { $exists: false } }).exec()))
                         i--
                     }
-                    tweets = tweets.sort(() => 0.5 - Math.random())
-                    tweets = tweets.slice(0, query.filterLength)
-                    res.send(tweets)
+                    if (tweets.length >= query.filterLength ) {
+                        tweets = tweets.sort(() => 0.5 - Math.random())
+                        tweets = tweets.slice(0, query.filterLength)
+                        res.send(tweets)
+                    } else if (tweets.length > 0) {
+                        res.send(tweets)
+                    } else {
+                        res.status(204).send()
+                    }
                 } catch (err) {
                     res.status(500).send({
                         error: "Couldn't fetch filtered tweets"

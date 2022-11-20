@@ -101,6 +101,7 @@ export default {
     async logout() {
       try {
         const response = await AuthenticationService.logout(this.$store.state.auth.refreshToken)
+        this.$store.state.auth.tutorial = true
         this.$store.dispatch('setRefreshToken', null)
         this.$store.dispatch('setAccessToken', null)
         this.$store.dispatch('removeUser')

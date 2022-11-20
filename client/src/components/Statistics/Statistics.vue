@@ -4,7 +4,8 @@
         <v-row v-if="this.$vuetify.breakpoint.lgAndUp">
             <v-spacer></v-spacer>
             <v-col>
-                <BarChart :height="400" v-if="uloaded" class="chart" :uData="uData"></BarChart>
+                <v-row><BarChart :height="400" v-if="uloaded" class="chart" :uData="uData"></BarChart></v-row>
+                <v-row><div style="text-align: center;">This chart shows the amount of regular and expert users on our platform.</div></v-row>
             </v-col>
             <v-col></v-col>
             <v-col>
@@ -41,6 +42,7 @@
                         <v-col cols="2"></v-col>
                     </v-col>
                 </v-row>
+                <v-row class="mt-n8"><div style="text-align: center;">This chart shows the consensual labels used for all the tweets that have been fully annotated (5 times).</div></v-row>
             </v-col>
             <v-spacer></v-spacer>
         </v-row>
@@ -88,14 +90,16 @@
                     </v-col>
                     <v-col cols="3"></v-col>
                 </v-row>
+                <v-row class="mb-2"><div style="text-align: center;">This chart shows the consensual labels used for all the tweets posted in a certain time period that have been fully annotated (5 times).</div></v-row>
             </v-col>
             <v-spacer></v-spacer>
         </v-row>
         <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mb-5">
             <v-spacer></v-spacer>
-            <barChart v-if="uloaded" class="chart" :uData="uData"></barChart>
+            <BarChart v-if="uloaded" class="chart" :uData="uData"></BarChart>
             <v-spacer></v-spacer>
         </v-row>
+        <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mt-n2 mb-1"><v-spacer></v-spacer><div style="text-align: center;">This chart shows the amount of regular and expert users on our platform.</div><v-spacer></v-spacer></v-row>
         <v-row v-if="this.$vuetify.breakpoint.mdAndDown" class="mb-2">
             <v-spacer></v-spacer>
             <v-col>
@@ -132,6 +136,7 @@
                         <v-col cols="2"></v-col>
                     </v-col>
                 </v-row>
+                <v-row class="mt-n8"><div style="text-align: center;">This chart shows the consensual labels used for all the tweets that have been fully annotated (5 times).</div></v-row>
             </v-col>
             <v-spacer></v-spacer>
         </v-row>
@@ -180,7 +185,7 @@
                     </v-col>
                     <v-col cols="3"></v-col>
                 </v-row>
-
+                <v-row><div style="text-align: center;">This chart shows the consensual labels used for all the tweets posted in a certain time period that have been fully annotated (5 times).</div></v-row>
             </v-col>
             <v-spacer></v-spacer>
         </v-row>      

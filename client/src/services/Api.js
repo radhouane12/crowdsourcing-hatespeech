@@ -31,6 +31,7 @@ function createAxiosRequest () {
                 store.state.auth.refreshToken = null,
                 store.state.auth.accessToken = null,
                 store.state.auth.user = null,
+                store.state.auth.tutorial = true,
                 store.state.auth.isExpert = false,
                 store.state.auth.testState = false,
                 router.push({ name: 'landing' }).catch(error => {
