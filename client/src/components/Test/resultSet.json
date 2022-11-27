@@ -7,7 +7,7 @@
         "category": [
             "Gender"
         ],
-        "labels": ["Hateful"]
+        "labels": ["Threat"]
     },
     {
         "id": "2",
@@ -34,7 +34,7 @@
         "category": [
             "Disability"
         ],
-        "labels": ["Hateful"]
+        "labels": ["Neutral"]
     },
     {
         "id": "5",
@@ -52,7 +52,7 @@
         "category": [
             "Ethnicity"
         ],
-        "labels": ["Hateful"]
+        "labels": ["Abusive"]
     },
     {
         "id": "7",
@@ -70,7 +70,7 @@
         "category": [
             "Sexuality"
         ],
-        "labels": ["Hateful"]
+        "labels": ["Neutral"]
     },
     {
         "id": "9",
