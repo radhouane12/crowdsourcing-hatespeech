@@ -122,7 +122,7 @@ export default {
             filterLength: 5,
             tweets: null,
             noTweetsLeftAtDb: false,
-            date: '2020-01-01',
+            date: '2022-01-01',
             menu: false,
             categories: [0, 1, 2, 3, 4, 5],
             help: false,
