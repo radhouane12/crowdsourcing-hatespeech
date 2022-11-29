@@ -10,7 +10,8 @@ git clone git@github.com:radhouane12/crowdsourcing-hatespeech.git
 ```
 
 # Running
-```requirements
+## Requirements
+```
 MongoDB
 NodeJS & npm
 Python3.x & pip
