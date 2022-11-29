@@ -10,6 +10,16 @@ git clone git@github.com:radhouane12/crowdsourcing-hatespeech.git
 ```
 
 # Running
+```requirements
+MongoDB
+NodeJS & npm
+Python3.x & pip
+
+install Twint: 
+    cd scraper/twint
+    pip3 install . -r requirements.txt
+```
+
 ## Production Frontend
 ```WSL/Ubunutu
 ssh root@191.96.53.32
